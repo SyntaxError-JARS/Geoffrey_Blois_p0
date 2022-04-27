@@ -51,7 +51,11 @@ from transactiontable t;
 
 select * from actions_account;
 
-
+-- These will need to be dropped if I want to drop the tables
+drop view all_account_info;
+drop view user_account;
+drop view bank_account;
+drop view actions_account;
 -- update commands 
 
 -- This update all users to Johndoe
