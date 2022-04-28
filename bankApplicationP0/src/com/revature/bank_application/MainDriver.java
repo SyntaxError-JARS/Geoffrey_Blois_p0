@@ -11,6 +11,7 @@ public class MainDriver {
     static BufferedReader terminalReader = new BufferedReader(new InputStreamReader(System.in));
     public static void main(String[] args) {
 
+        // When the user start the application they will be greeted with this:
         String welcome = "Welcome to the Bank of Everything!";
         String option1 = " 1) Not a User? Create an Account";
         String option2 = " 2) A returning User? Sign in";
@@ -23,6 +24,7 @@ public class MainDriver {
             String userInputToEnterBankApp = terminalReader.readLine();
 
 
+            // This Will allow users to select an input.
             switch (userInputToEnterBankApp) {
                 case "1":
                     System.out.println("User has chosen to create an account ...");
@@ -48,7 +50,7 @@ public class MainDriver {
 
 
     }
-
+    // This code will grab an exception and throw to the method above.
     static void userCreateAccountInput() throws IOException{
         System.out.println("Create a Username");
         String username = terminalReader.readLine();
