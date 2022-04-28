@@ -43,3 +43,7 @@ drop table bankaccount;
 -- execute third
 drop table transactiontable;
 
+-- Added a way to drop all of the tables and its foreign keys
+drop table if exists transactiontable, useraccount, bankaccount 
+cascade;
+
