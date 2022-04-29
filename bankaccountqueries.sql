@@ -8,10 +8,10 @@ values
 
 
 -- Next I am going to insert data into the user account
--- The info that needs to be inserted is: id, user name, password, times user loged in (all in that order)
+-- The info that needs to be inserted is: id, user name, password, eamil, phonenumber, times user loged in (all in that order)
 insert into useraccount 
 values
-(10, 'Geoffrey', 'Pass', 35);
+(10, 'Geoffrey', 'Pass', 'gblois@yahoo.com',8501234567, 35);
 
 -- Adding data to the transacion table
 -- The info that need to be add into the table is: account number, transactions, times deposited money, times withdrew money
@@ -21,7 +21,7 @@ values
 
 -- Going to create a view
 create view all_account_info as
-select u.id, u.user_name, u.password, u.times_user_logins, b.bank_account_number, b.bank_account_name, b.bank_account_ammount, t.transactions, t.times_deposite_money, t.times_withdrew_money  
+select u.id, u.user_name, u.password, u.email, u.phone_number, u.times_user_logins, b.bank_account_number, b.bank_account_name, b.bank_account_ammount, t.transactions, t.times_deposite_money, t.times_withdrew_money  
 from bankaccount b
 join useraccount u on b.bank_account_number = u.id 
 join transactiontable t on account_number = t.account_number; 
@@ -32,7 +32,7 @@ select * from all_account_info;
 
 -- Shows all the information from the user account table
 create view user_account as
-select u.id, u.user_name, u."password", u.times_user_logins 
+select u.id, u.user_name, u."password", u.email, u.phone_number, u.times_user_logins 
 from useraccount u;
 
 select * from user_account;
