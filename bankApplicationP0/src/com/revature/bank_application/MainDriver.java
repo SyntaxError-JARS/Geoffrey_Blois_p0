@@ -34,7 +34,6 @@ public class MainDriver {
                         break;
                     case "2":
                         System.out.println("User has chosen to Login. Welcome back User ...");
-                        userCreateAccountInput();
                         break;
                     case "3":
                         System.out.println("User has chosen to exit application. Thank for using our service ...");
