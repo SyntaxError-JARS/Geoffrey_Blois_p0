@@ -8,6 +8,8 @@ create table useraccount(
 	id serial primary key,
 	user_name varchar(20) not null unique,
 	password varchar(20) not null unique,
+	email varchar(20) not null unique,
+	phone_number varchar(20) not null unique,
 	times_user_logins int not null
 );
 
