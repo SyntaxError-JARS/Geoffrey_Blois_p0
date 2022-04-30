@@ -1,5 +1,6 @@
 package com.revature.bank_application;
 
+import com.revature.bank_application.models.SignInAccount;
 import com.revature.bank_application.models.UserAccountData;
 
 import java.io.*;
@@ -25,6 +26,8 @@ public class MainDriver {
                 System.out.println("Select one of the input from above\n >");
                 String userInputToEnterBankApp = terminalReader.readLine();
 
+                SignInAccount  signIn = new SignInAccount();
+
 
                 // This Will allow users to select an input.
                 switch (userInputToEnterBankApp) {
@@ -34,6 +37,7 @@ public class MainDriver {
                         break;
                     case "2":
                         System.out.println("User has chosen to Login. Welcome back User ...");
+                        
                         break;
                     case "3":
                         System.out.println("User has chosen to exit application. Thank for using our service ...");
