@@ -1,23 +1,23 @@
 -- First I am going to insert data to the bank_account table
--- The info that needs to be inserted is:  bank account number, bank account name, bank account ammount, transactions, times deposited money,
+-- The info that needs to be inserted is:  bank Id, bank account number, bank account name, bank account ammount, transactions, times deposited money,
 -- times withdrew money, has bank account (all in that order)
 insert into bankaccount 
 values
-(10, 'Checking Account', 10000, true);
+(10, 15, 'Checking Account', 10000, true);
 
 
 
 -- Next I am going to insert data into the user account
--- The info that needs to be inserted is: id, user name, password, eamil, phonenumber, times user loged in (all in that order)
+-- The info that needs to be inserted is: id, user name, password, eamil, First name, Last Name, times user loged in (all in that order)
 insert into useraccount 
 values
-(10, 'Geoffrey', 'Pass', 'gblois@yahoo.com',8501234567, 35);
+(10, 'Luculentmovie00', 'Pass', 'gblois@yahoo.com','Geoffrey', 'Blois', 35);
 
 -- Adding data to the transacion table
--- The info that need to be add into the table is: account number, transactions, times deposited money, times withdrew money
+-- The info that need to be add into the table is: account number, transactions, type of transaction, Memo of transaction.
 insert into transactiontable 
 values
-(10, 30, 50, 60);
+(5, 15, 'Deposite', 'Paid 10000 dollars from a sale of a car');
 
 -- Going to create a view
 create view all_account_info as
