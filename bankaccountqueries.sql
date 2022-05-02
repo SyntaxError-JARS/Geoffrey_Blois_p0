@@ -14,10 +14,10 @@ values
 (10, 'Luculentmovie00', 'Pass', 'gblois@yahoo.com','Geoffrey', 'Blois', 35);
 
 -- Adding data to the transacion table
--- The info that need to be add into the table is: account number, transactions, type of transaction, Memo of transaction.
+-- The info that need to be add into the table is:id number account number, type of transaction, Memo of transaction.
 insert into transactiontable 
 values
-(5, 15, 'Deposite', 'Paid 10000 dollars from a sale of a car');
+(9, 5, 'Deposite', 'Paid 10000 dollars from a sale of a car');
 
 -- Going to create a view
 create view all_account_info as
