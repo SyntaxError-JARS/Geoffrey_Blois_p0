@@ -1,27 +1,25 @@
 package com.revature.bank_application.models;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
 public class UserAccountData {
 
     // These are creating private strings that only this script can see.
-    private static String userName;
-    private static String password;
-    private static String phoneNumber;
-    private static String email;
+    private String userName;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private String email;
 
     /*public UserAccountData()
     {
         super();
     }*/
     // This method is grabbing the Strings above and assigning them
-    public UserAccountData(String userName, String password, String phoneNumber, String email){
+    public UserAccountData(String userName, String password, String firstName,String lastName, String email){
         super();
         this.userName = userName;
         this.password = password;
-        this.phoneNumber = phoneNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
 
     }
@@ -43,12 +41,20 @@ public class UserAccountData {
         this.password = password;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -67,7 +73,9 @@ public class UserAccountData {
                 .append(",")
                 .append(password)
                 .append(",")
-                .append(phoneNumber)
+                .append(firstName)
+                .append(",")
+                .append(lastName)
                 .append(",")
                 .append(email);
 
@@ -80,7 +88,8 @@ public class UserAccountData {
         return "UserAccountData{" +
                 "userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }
