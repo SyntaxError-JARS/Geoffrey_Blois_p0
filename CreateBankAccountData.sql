@@ -7,7 +7,7 @@ create schema bankaccount;
 create table useraccount(
 	id serial primary key,
 	user_name varchar(20) not null unique,
-	password varchar(20) not null unique,
+	password varchar(20) not null ,
 	email varchar(20) not null unique,
 	first_Name varchar(30) not null,
 	last_name varchar(30) not null,

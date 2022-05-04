@@ -38,8 +38,9 @@ public class RegisterMenu extends Menu {
             return;
         }
 
-        UserAccountData accountData = new UserAccountData(username, password, firstName, lastName, email);
-        userAccountServices.registerAccount(accountData);
+        UserAccountData userAccountData = new UserAccountData(username, password, firstName, lastName, email);
+        System.out.println(" Here is the user account information provided by the user:"+ userAccountData);
+        userAccountServices.registerAccount(userAccountData);
 
     }
 }

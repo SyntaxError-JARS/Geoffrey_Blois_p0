@@ -11,6 +11,7 @@ public interface BankAccountCrudable <T>{
     T create(T newObject);
 
     UserAccountData[] findAll() throws IOException;
+    T findById(String id);
 
     boolean update(T updateObj);
 

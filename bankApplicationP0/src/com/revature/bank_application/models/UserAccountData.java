@@ -24,6 +24,10 @@ public class UserAccountData {
 
     }
 
+    public UserAccountData() {
+
+    }
+
     // These strings are getting the string then return the proper value
     public String getUserName() {
         return userName;

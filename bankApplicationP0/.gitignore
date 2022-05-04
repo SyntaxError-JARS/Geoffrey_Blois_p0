@@ -1,4 +1,4 @@
 .idea/
 bankApplicationP0.iml
 out/
-db.properties
+data/db.properties

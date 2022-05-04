@@ -1,28 +1,47 @@
 package com.revature.bank_application.daos;
 
 import com.revature.bank_application.models.UserAccountData;
+import com.revature.bank_application.util.ConnectionFactory;
 
 import java.io.*;
+import java.sql.*;
 
 
 // The word implements below allow me to implement method from the BankAccountCrudable Interface class. This make so I don't have to recreate so many methods.
 public class UserAccountDao implements BankAccountCrudable<UserAccountData> {
     @Override
-    public UserAccountData create(UserAccountData accountData) {
+    public UserAccountData create(UserAccountData userAccountData) {
 
-        // This is obtaining the user_data.txt file from the desired path. This allows me to write to the path or in the findAll() method I can read it.
-        File userPersistingData = new File("data/user_Data.txt");
+        try(Connection conn = ConnectionFactory.getInstance().getConnection();) {
+            // Never concatenate or directly use these strings inside of the sql statement;
+            //String sql = "insert into useraccount values ("
+            System.out.println("Here is the new user as it enters the doa layer"+ userAccountData);
+
+            String sql = "insert into useraccount values(default, ?, ?, ? ,? ,?, 0)";
+            //String sql = "insert into useraccount (username, password, email, first_name, last_name)  values(default ?, ?, ? ,? ,?, 0)";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            // 1 -indexed, so first ? starts at 1
+            ps.setString(1, userAccountData.getUserName());
+            ps.setString(2, userAccountData.getPassword());
+            ps.setString(3, userAccountData.getEmail());
+            ps.setString(4, userAccountData.getFirstName());
+            ps.setString(5, userAccountData.getLastName());
+
+            int checkInsert = ps.executeUpdate();
+
+            if(checkInsert == 0){
+                throw new RuntimeException();
+            }
 
 
-        try (FileWriter fileWriter = new FileWriter(userPersistingData, true)) {
-            fileWriter.write(accountData.toFileString());
-        } catch (IOException e) {
+        }catch (SQLException | RuntimeException e){
             e.printStackTrace();
             return null;
-
         }
-
-        return accountData;
+        System.out.println("New User Added to the data base");
+        return userAccountData;
     }
 
 
@@ -30,40 +49,77 @@ public class UserAccountDao implements BankAccountCrudable<UserAccountData> {
     @Override
     public UserAccountData[] findAll() throws IOException {
         // This allows me to read files
-        FileReader fileReader = new FileReader("data/User_Data.txt");
-        BufferedReader dataReader = new BufferedReader(fileReader);
+
 
         // I am initializing an array of 10 userAccountData
         UserAccountData[] users = new UserAccountData[10];
-
-        // This is going to read the file line by line
-        String userData = dataReader.readLine();
         int index = 0;
 
-        while (userData != null){
+        try (Connection conn = ConnectionFactory.getInstance().getConnection();){ // try with resource, becuase connection extends the interface Auto-closes
 
-            // The .split splits the data that is separated by a comma
-            String[] userInfo = userData.split(",");
+            String sql = "select * from useraccount";
+            Statement s = conn.createStatement();
 
-            String username = userInfo[0];
-            String password = userInfo[1];
-            String firstName = userInfo[2];
-            String lastName = userInfo[3];
-            String email = userInfo[4];
+            s.executeQuery(sql); //select
+            //s.executeUpdate(sql); // Insert, delete, update
+
+            ResultSet rs = s.executeQuery(sql);
+
+            while (rs.next()) {
+
+                UserAccountData userAccountData = new UserAccountData();
+                userAccountData.setFirstName(rs.getString("first_name"));
+                userAccountData.setLastName(rs.getString("last_name"));
+                userAccountData.setUserName(rs.getString("user_name"));
+                userAccountData.setEmail(rs.getString("email"));
+                userAccountData.setPassword(rs.getString("password"));
+
+                System.out.println("Inserted User int index" + index);
+                users[index] = userAccountData;
+
+                index++;
 
 
-            UserAccountData user = new UserAccountData(username, password, firstName, lastName, email);
-            users[index] = user;
 
-            index++;
-
-            userData = dataReader.readLine();
-
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
-        dataReader.close();
+
 
         System.out.println("A New User has been created!!!");
         return users;
+    }
+
+    @Override
+    public UserAccountData findById(String id) {
+        try(Connection conn = ConnectionFactory.getInstance().getConnection();){
+
+            String sql = "select * from useraccount where id =?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, Integer.parseInt(id));
+
+             ResultSet rs = ps.executeQuery();
+
+            UserAccountData userAccountData = new UserAccountData();
+
+            userAccountData.setFirstName(rs.getString("first_name"));
+            userAccountData.setLastName(rs.getString("last_name"));
+            userAccountData.setUserName(rs.getString("user_name"));
+            userAccountData.setEmail(rs.getString("email"));
+            userAccountData.setPassword(rs.getString("password"));
+
+
+
+            return userAccountData;
+
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
 
