@@ -30,7 +30,12 @@ public class UserAccountServices {
     // This is where all of my check will be for creating an account.
     public boolean ValidateNewAccount(UserAccountData userAccountData){
         if(userAccountData == null) return false;
-        // TODO: Add more checks for validating a new account.
+        if(userAccountData.getUserName() == null || userAccountData.getUserName().trim().equals("")) return false;
+        if(userAccountData.getFirstName() == null || userAccountData.getFirstName().trim().equals("")) return false;
+        if(userAccountData.getLastName() == null || userAccountData.getLastName().trim().equals("")) return false;
+        if(userAccountData.getPassword() == null || userAccountData.getPassword().trim().equals("")) return false;
+        if(userAccountData.getEmail() == null || userAccountData.getEmail().trim().equals("")) return false;
+
         return true;
     }
 }
