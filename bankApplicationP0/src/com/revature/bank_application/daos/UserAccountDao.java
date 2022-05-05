@@ -9,6 +9,8 @@ import java.sql.*;
 
 // The word implements below allow me to implement method from the BankAccountCrudable Interface class. This make so I don't have to recreate so many methods.
 public class UserAccountDao implements BankAccountCrudable<UserAccountData> {
+
+
     @Override
     public UserAccountData create(UserAccountData userAccountData) {
 
@@ -102,7 +104,7 @@ public class UserAccountDao implements BankAccountCrudable<UserAccountData> {
 
             ps.setInt(1, Integer.parseInt(id));
 
-             ResultSet rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
 
             UserAccountData userAccountData = new UserAccountData();
 
@@ -111,8 +113,6 @@ public class UserAccountDao implements BankAccountCrudable<UserAccountData> {
             userAccountData.setUserName(rs.getString("user_name"));
             userAccountData.setEmail(rs.getString("email"));
             userAccountData.setPassword(rs.getString("password"));
-
-
 
             return userAccountData;
 
@@ -124,12 +124,49 @@ public class UserAccountDao implements BankAccountCrudable<UserAccountData> {
 
 
     @Override
-    public boolean update(UserAccountData updateObj) {
-        return false;
+    public boolean update(String id, String newUsername) {
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+
+
+            String sql = "update user_name from useraccount set user_name=? where id=?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            //ps.setInt(1, Integer.parseInt(id));
+            UserAccountData userAccountData = new UserAccountData();
+            ps.setInt(1, Integer.parseInt(id));
+            ps.setString(2, userAccountData.getUserName());
+
+
+            ps.executeUpdate();
+
+            return true;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
     @Override
     public boolean delete(String id) {
-        return false;
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+            String sql = "delete from useraccount where id=?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, Integer.parseInt(id));
+
+            System.out.println("About to execute the ps.executeupdate");
+             ps.executeUpdate();
+
+            System.out.println("Successfully deleted a user");
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+
+        }
     }
 }

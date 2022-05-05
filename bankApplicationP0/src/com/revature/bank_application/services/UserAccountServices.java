@@ -49,4 +49,16 @@ public class UserAccountServices {
 
         return true;
     }
+
+    public void deleteAccount(String id){
+        UserAccountData userAccountData = new UserAccountData();
+
+        boolean deleteAccount = userAccountDao.delete(id);
+
+    }
+
+    public void updateAccount(String id, String userName){
+        boolean updateAccount = userAccountDao.update(id, userName);
+    }
+
 }

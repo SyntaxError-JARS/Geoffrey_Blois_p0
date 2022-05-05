@@ -17,7 +17,7 @@ values
 -- The info that need to be add into the table is:id number account number, type of transaction, Memo of transaction.
 insert into transactiontable 
 values
-(9, 5, 'Deposit', 'Paid 10000 dollars from a sale of a car');
+(9, 15, 'Deposit', 'Paid 10000 dollars from a sale of a car');
 
 -- Going to create a view
 create view all_account_info as

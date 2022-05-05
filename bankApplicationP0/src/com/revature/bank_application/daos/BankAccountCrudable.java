@@ -13,7 +13,9 @@ public interface BankAccountCrudable <T>{
     UserAccountData[] findAll() throws IOException;
     T findById(String id);
 
-    boolean update(T updateObj);
+    //boolean update(String id);
+
+    boolean update(String id, String newUsername);
 
     boolean delete(String id);
 }

@@ -9,6 +9,8 @@ public class UserAccountData {
     private String lastName;
     private String email;
 
+    private String newUsername;
+
     /*public UserAccountData()
     {
         super();
@@ -27,7 +29,6 @@ public class UserAccountData {
     public UserAccountData() {
 
     }
-
     // These strings are getting the string then return the proper value
     public String getUserName() {
         return userName;

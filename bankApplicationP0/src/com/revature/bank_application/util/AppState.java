@@ -39,8 +39,8 @@ public class AppState {
                 // While this is running it will continue to run the application.
                 while(isRunning == true) {
                     // Have to manually switch between these for now.
-                    //welcomeMenu.render();
-                    registerMenu.render();
+                    welcomeMenu.render();
+                    //registerMenu.render();
                     System.out.println("Loading the welcomeMenu");
                 }
             } catch (Exception e) {
