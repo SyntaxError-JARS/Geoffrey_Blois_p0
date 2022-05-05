@@ -1,4 +1,4 @@
-package com.revature.bank_application.util;
+package main.java.com.revature.bank_application.util;
 
 // Design patterns
 
@@ -29,7 +29,7 @@ public class ConnectionFactory {
 
     private ConnectionFactory(){
         try {
-            prop.load(new FileReader("data/db.properties"));
+            prop.load(new FileReader("src/main/data/db.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }

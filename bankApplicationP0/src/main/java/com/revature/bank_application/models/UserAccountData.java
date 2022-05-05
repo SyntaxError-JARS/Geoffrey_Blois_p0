@@ -1,8 +1,9 @@
-package com.revature.bank_application.models;
+package main.java.com.revature.bank_application.models;
 
 public class UserAccountData {
 
     // These are creating private strings that only this script can see.
+    // Using the pillar of the OOP Encapsulation
     private String userName;
     private String password;
     private String firstName;
@@ -16,6 +17,8 @@ public class UserAccountData {
         super();
     }*/
     // This method is grabbing the Strings above and assigning them
+
+    // Overloading constructors another subset of polymorphism
     public UserAccountData(String userName, String password, String firstName,String lastName, String email){
         super();
         this.userName = userName;
@@ -42,6 +45,7 @@ public class UserAccountData {
         return password;
     }
 
+    // TODO: Get rid of this!!!!!!!!!!!!!!!!!
     public void setPassword(String password) {
         this.password = password;
     }
@@ -88,6 +92,7 @@ public class UserAccountData {
     }
 
     // I guess that this checks to see if any data has been enter and if it has it will over right it otherwise it will return null or some default data.
+    // TODO: get rid of the password.
     @Override
     public String toString() {
         return "UserAccountData{" +

@@ -1,4 +1,5 @@
 .idea/
 bankApplicationP0.iml
 out/
-data/db.properties
+src/main/resources/db.properties
+target/

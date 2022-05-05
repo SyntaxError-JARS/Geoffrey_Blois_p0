@@ -1,4 +1,4 @@
-package com.revature.bank_application.menus;
+package main.java.com.revature.bank_application.menus;
 
 import java.io.BufferedReader;
 

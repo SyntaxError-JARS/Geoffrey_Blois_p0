@@ -1,7 +1,7 @@
-package com.revature.bank_application.menus;
+package main.java.com.revature.bank_application.menus;
 
-import com.revature.bank_application.models.UserAccountData;
-import com.revature.bank_application.services.UserAccountServices;
+import main.java.com.revature.bank_application.models.UserAccountData;
+import main.java.com.revature.bank_application.services.UserAccountServices;
 
 import java.io.BufferedReader;
 
@@ -12,6 +12,8 @@ public class RegisterMenu extends Menu {
         super("Register", "/register", terminalReader);
     }
 
+    // Polymorphism Another pillar of OOP for the same thing doing different things
+    // This is overriding a method
     @Override
     public void render() throws Exception {
         System.out.println("Create a Username");

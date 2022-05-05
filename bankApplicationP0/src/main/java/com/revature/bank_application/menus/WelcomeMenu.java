@@ -1,12 +1,14 @@
-package com.revature.bank_application.menus;
+package main.java.com.revature.bank_application.menus;
 
-import com.revature.bank_application.services.UserAccountServices;
+import main.java.com.revature.bank_application.services.UserAccountServices;
 
 import java.io.BufferedReader;
 
-import static com.revature.bank_application.util.AppState.shutdown;
+import static main.java.com.revature.bank_application.util.AppState.shutdown;
 
 // The extends key word allows me to extend the abstract menu class to quickly make new menus
+
+// Inheritance from menu abstract class. Another pillar of OOp
 public class WelcomeMenu extends Menu{
 
     private UserAccountServices userAccountServices;
@@ -54,7 +56,7 @@ public class WelcomeMenu extends Menu{
                 String id2 = terminalReader.readLine();
                 System.out.println("Please enter the new username you would like the account to have...");
                 String userName = terminalReader.readLine();
-                userAccountServices.updateAccount(id2, userName);
+                //userAccountServices.updateAccount(id2, userName);
                 break;
             case "5":
                 System.out.println("User has chosen to exit application. Thank for using our service ...");

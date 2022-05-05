@@ -1,8 +1,8 @@
-package com.revature.bank_application.util;
+package main.java.com.revature.bank_application.util;
 
-import com.revature.bank_application.menus.RegisterMenu;
-import com.revature.bank_application.menus.WelcomeMenu;
-import com.revature.bank_application.services.UserAccountServices;
+import main.java.com.revature.bank_application.menus.RegisterMenu;
+import main.java.com.revature.bank_application.menus.WelcomeMenu;
+import main.java.com.revature.bank_application.services.UserAccountServices;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

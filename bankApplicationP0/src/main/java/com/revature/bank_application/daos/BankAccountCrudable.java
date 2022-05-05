@@ -1,6 +1,6 @@
-package com.revature.bank_application.daos;
+package main.java.com.revature.bank_application.daos;
 
-import com.revature.bank_application.models.UserAccountData;
+import main.java.com.revature.bank_application.models.UserAccountData;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ public interface BankAccountCrudable <T>{
 
     //boolean update(String id);
 
-    boolean update(String id, String newUsername);
+    boolean update(T updateObj);
 
     boolean delete(String id);
 }

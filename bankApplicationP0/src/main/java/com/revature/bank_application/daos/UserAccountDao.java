@@ -1,7 +1,7 @@
-package com.revature.bank_application.daos;
+package main.java.com.revature.bank_application.daos;
 
-import com.revature.bank_application.models.UserAccountData;
-import com.revature.bank_application.util.ConnectionFactory;
+import main.java.com.revature.bank_application.models.UserAccountData;
+import main.java.com.revature.bank_application.util.ConnectionFactory;
 
 import java.io.*;
 import java.sql.*;
@@ -124,7 +124,7 @@ public class UserAccountDao implements BankAccountCrudable<UserAccountData> {
 
 
     @Override
-    public boolean update(String id, String newUsername) {
+    public boolean update(UserAccountData updateObject) {
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
 
@@ -134,7 +134,7 @@ public class UserAccountDao implements BankAccountCrudable<UserAccountData> {
 
             //ps.setInt(1, Integer.parseInt(id));
             UserAccountData userAccountData = new UserAccountData();
-            ps.setInt(1, Integer.parseInt(id));
+            //ps.setInt(1, Integer.parseInt(updateObject));
             ps.setString(2, userAccountData.getUserName());
 
 

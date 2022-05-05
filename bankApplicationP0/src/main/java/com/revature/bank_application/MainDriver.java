@@ -1,6 +1,6 @@
-package com.revature.bank_application;
+package main.java.com.revature.bank_application;
 
-import com.revature.bank_application.util.AppState;
+import main.java.com.revature.bank_application.util.AppState;
 
 
 public class MainDriver {

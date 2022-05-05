@@ -1,7 +1,7 @@
-package com.revature.bank_application.services;
+package main.java.com.revature.bank_application.services;
 
-import com.revature.bank_application.daos.UserAccountDao;
-import com.revature.bank_application.models.UserAccountData;
+import main.java.com.revature.bank_application.daos.UserAccountDao;
+import main.java.com.revature.bank_application.models.UserAccountData;
 
 import java.io.IOException;
 
@@ -15,10 +15,17 @@ public class UserAccountServices {
         UserAccountData[] userAccountData = new UserAccountData[0];
         try{
             userAccountData = userAccountDao.findAll();
-            for (int i = 0; i < userAccountData.length; i++){
-                UserAccountData userAccountData1 = userAccountData[i];
-                System.out.println(userAccountData1.toString());
+//            for (int i = 0; i < userAccountData.length; i++){
+//                UserAccountData userAccountData1 = userAccountData[i];
+//                System.out.println(userAccountData1.toString());
+//            }
+            // forEach
+            for(Object account:userAccountData){
+                if (account != null) {
+                    System.out.println((UserAccountData) account); //UserAccountData indicates a single in the account array
+                }
             }
+
         }catch (IOException | NullPointerException e){
 
         }
@@ -57,8 +64,8 @@ public class UserAccountServices {
 
     }
 
-    public void updateAccount(String id, String userName){
-        boolean updateAccount = userAccountDao.update(id, userName);
+    public void updateAccount(UserAccountData updateObject){
+        boolean updateAccount = userAccountDao.update(updateObject);
     }
 
 }
