@@ -33,11 +33,11 @@ create table transactiontable(
 -- Alter all account before adding data!!!!!!!!!!
 -- This alter table will allow me to connect the user account table and bank account table together for referentail integerty
 alter table bankaccount  
-add constraint fk_bank_id foreign key(bank_id) references useraccount(id);
+add constraint fk_bank_id foreign key(bank_id) references useraccount(id) on delete cascade;
 
 -- This alter table will allow me to connect the bankaccount table and accounttransation table together
 alter table transactiontable 
-add constraint fk_account_number foreign key(account_number) references bankaccount(bank_account_number);
+add constraint fk_account_number foreign key(account_number) references bankaccount(bank_account_number) on delete cascade;
 
 -- If for some reason I mess up I can use these commands to drop the tables and start again.
 -- execute first
