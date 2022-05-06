@@ -12,13 +12,16 @@ public class BankAccountData {
     private int bankAccountAmount;
     private boolean hasBankAccount;
 
+    private int randBankNumber;
 
-    public BankAccountData(int bankAccountNumber, String bankAccountName, int bankAccountAmount, boolean hasBankAccount){
+
+    public BankAccountData(int bankAccountNumber, String bankAccountName, int bankAccountAmount, boolean hasBankAccount, int randBankNumber){
         super();
         this.bankAccountNumber = bankAccountNumber;
         this.bankAccountName = bankAccountName;
         this.bankAccountAmount = bankAccountAmount;
         this.hasBankAccount = hasBankAccount;
+        this.randBankNumber = randBankNumber;
     }
 
     public int getBankAccountNumber() {
@@ -66,13 +69,14 @@ public class BankAccountData {
     }
 
     // This randomBankAccount method will generate a random number between 0 - 999999999
-    public void randomBankAccountNumber(){
+    public static int randomBankAccountNumber(){
         // The Random is a class that java provides. So all I had to do was right the Random and java imported the Random class into this class.
         // I am also creating a new instance of random when ever this method is called.
         Random rand = new Random();
         // The bound here means that the random number will not be above 999,999,999. NOTE: These number provided needs to be positive as a negative number will not work.
         int number = rand.nextInt(999999999);
 
+        return number;
     }
     @Override
     public String toString() {

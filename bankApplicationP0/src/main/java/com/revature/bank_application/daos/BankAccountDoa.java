@@ -1,5 +1,6 @@
 package main.java.com.revature.bank_application.daos;
 
+import main.java.com.revature.bank_application.execeptions.BankAccountInsertDataException;
 import main.java.com.revature.bank_application.models.BankAccountData;
 import main.java.com.revature.bank_application.models.UserAccountData;
 import main.java.com.revature.bank_application.util.ConnectionFactory;
@@ -14,11 +15,20 @@ public class BankAccountDoa implements BankAccountCrudable<BankAccountData>{
     public BankAccountData create(BankAccountData bankAccountData) {
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
-            String sql = "insert into bankaccount values(default, ?, ?, ?, true";
+            // TODO: add the id or username so it adds to the right account
+            String sql = "insert into bankaccount values(default, ?, ?, ?, true)";
 
             PreparedStatement ps = conn.prepareStatement(sql);
 
-           // ps.setInt(1, Integer.parseInt());
+            ps.setInt(1, BankAccountData.randomBankAccountNumber());
+            ps.setString(2, bankAccountData.getBankAccountName());
+            ps.setInt(3, bankAccountData.getBankAccountAmount());
+
+            int checkInsert = ps.executeUpdate();
+
+            if(checkInsert == 0){
+                throw new BankAccountInsertDataException("The sql statement came back as 0. Please check the information inputted or the String sql above");
+            }
 
 
 
