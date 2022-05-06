@@ -15,7 +15,7 @@ public interface BankAccountCrudable <T>{
 
     //boolean update(String id);
 
-    boolean update(T updateObj);
+    boolean update(String id2, String userName);
 
     boolean delete(String id);
 }

@@ -64,8 +64,8 @@ public class UserAccountServices {
 
     }
 
-    public void updateAccount(UserAccountData updateObject){
-        boolean updateAccount = userAccountDao.update(updateObject);
+    public void updateAccount(String id2, String userName){
+        boolean updateAccount = userAccountDao.update(id2, userName);
     }
 
 }

@@ -29,7 +29,7 @@ public class ConnectionFactory {
 
     private ConnectionFactory(){
         try {
-            prop.load(new FileReader("src/main/data/db.properties"));
+            prop.load(new FileReader("src/main/resources/db.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }

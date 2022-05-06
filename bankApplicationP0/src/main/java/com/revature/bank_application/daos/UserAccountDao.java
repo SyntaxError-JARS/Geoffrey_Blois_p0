@@ -57,14 +57,19 @@ public class UserAccountDao implements BankAccountCrudable<UserAccountData> {
         UserAccountData[] users = new UserAccountData[10];
         int index = 0;
 
-        try (Connection conn = ConnectionFactory.getInstance().getConnection();){ // try with resource, becuase connection extends the interface Auto-closes
+        // In this try with resources once called it establishes a connection to my database so that the methods inside it can interact with my database.
+        try (Connection conn = ConnectionFactory.getInstance().getConnection();){ // try with resource, because connection extends the interface Auto-closes
 
+            // Creating a string called sql which will tell sql once run what statement should be run.
             String sql = "select * from useraccount";
+            // The statement s here means that the statement is an executable instruction which tell the compiler what to perform.
             Statement s = conn.createStatement();
 
+            // This is executing a query statement for all user information in the useraccount table.
             s.executeQuery(sql); //select
             //s.executeUpdate(sql); // Insert, delete, update
 
+            //
             ResultSet rs = s.executeQuery(sql);
 
             while (rs.next()) {
@@ -98,24 +103,32 @@ public class UserAccountDao implements BankAccountCrudable<UserAccountData> {
     public UserAccountData findById(String id) {
         try(Connection conn = ConnectionFactory.getInstance().getConnection();){
 
+            // This is creating a sql string for java to use with sql statements.
             String sql = "select * from useraccount where id =?";
 
+            //  The preparedStatement can help against sql injections. A preparedStatement is a statement that pre-complies SQL code to separate it from the data.
             PreparedStatement ps = conn.prepareStatement(sql);
 
+            // I only want to find one user with an id so I just need to parse the int of the id the user provides and when the sql statement is executed it will display the user.
             ps.setInt(1, Integer.parseInt(id));
 
+            //This is executing a query which can only be used with select.
             ResultSet rs = ps.executeQuery();
 
+            // This is creating a new user object to display the information requested.
             UserAccountData userAccountData = new UserAccountData();
 
+            // This is grabbing all the data that the user id is connected to.
             userAccountData.setFirstName(rs.getString("first_name"));
             userAccountData.setLastName(rs.getString("last_name"));
             userAccountData.setUserName(rs.getString("user_name"));
             userAccountData.setEmail(rs.getString("email"));
             userAccountData.setPassword(rs.getString("password"));
 
+            // Once this is completed it will return the userAccountData
             return userAccountData;
 
+            //This catch is catching an execution and uses the print stacktrace to print out the exact error in the terminal
         }catch (SQLException e){
             e.printStackTrace();
             return null;
@@ -124,23 +137,26 @@ public class UserAccountDao implements BankAccountCrudable<UserAccountData> {
 
 
     @Override
-    public boolean update(UserAccountData updateObject) {
+    public boolean update(String id2, String userName) {
+        // In this try with resource it is establishing a connection with my database
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
+            // The first ? in this is always 1.
+            String sql = ("update useraccount set user_name=? where id=?");
 
-            String sql = "update user_name from useraccount set user_name=? where id=?";
-
+            //  The preparedStatement can help against sql injections. A preparedStatement is a statement that pre-complies SQL code to separate it from the data.
             PreparedStatement ps = conn.prepareStatement(sql);
+            // These taking the user inputs from the menu and putting them into the sql statement.
+            // Whenever you do this the order matter so the first ? in sql line is the first parameterindex.
+            ps.setString(1, userName);
+            ps.setInt(2, Integer.parseInt(id2));
 
-            //ps.setInt(1, Integer.parseInt(id));
-            UserAccountData userAccountData = new UserAccountData();
-            //ps.setInt(1, Integer.parseInt(updateObject));
-            ps.setString(2, userAccountData.getUserName());
-
-
+            //This executes the sql statement in postgresql
             ps.executeUpdate();
-
+            System.out.println("Updated user account of" + id2 + " to " + userName );
             return true;
+
+            //This catch is catching an execution and uses the print stacktrace to print out the exact error in the terminal
         }catch (SQLException e){
             e.printStackTrace();
             return false;
@@ -150,19 +166,24 @@ public class UserAccountDao implements BankAccountCrudable<UserAccountData> {
 
     @Override
     public boolean delete(String id) {
-
+        // In this try with resources it is establishing a connection to my database.
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+            // This is the sql command I want to use when this method is called
             String sql = "delete from useraccount where id=?";
 
+            //  The preparedStatement can help against sql injections. A preparedStatement is a statement that pre-complies SQL code to separate it from the data.
             PreparedStatement ps = conn.prepareStatement(sql);
 
+            // This is inputing the id the user is imputing so when the statement gets executed the right user id account is deleted.
             ps.setInt(1, Integer.parseInt(id));
 
             System.out.println("About to execute the ps.executeupdate");
+            //This executes the sql statement in postgresql
              ps.executeUpdate();
 
             System.out.println("Successfully deleted a user");
             return true;
+            //This catch is catching an execution and uses the print stacktrace to print out the exact error in the terminal
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
