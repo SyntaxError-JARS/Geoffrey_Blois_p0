@@ -1,5 +1,7 @@
 package main.java.com.revature.bank_application.models;
 
+import java.util.Random;
+
 public class BankAccountData {
 
      //File signInFile = new File("data/User_Data");
@@ -9,6 +11,7 @@ public class BankAccountData {
     private String bankAccountName;
     private int bankAccountAmount;
     private boolean hasBankAccount;
+
 
     public BankAccountData(int bankAccountNumber, String bankAccountName, int bankAccountAmount, boolean hasBankAccount){
         super();
@@ -60,6 +63,16 @@ public class BankAccountData {
                       .append(",")
                       .append(hasBankAccount);
         return mutableString.toString();
+    }
+
+    // This randomBankAccount method will generate a random number between 0 - 999999999
+    public void randomBankAccountNumber(){
+        // The Random is a class that java provides. So all I had to do was right the Random and java imported the Random class into this class.
+        // I am also creating a new instance of random when ever this method is called.
+        Random rand = new Random();
+        // The bound here means that the random number will not be above 999,999,999. NOTE: These number provided needs to be positive as a negative number will not work.
+        int number = rand.nextInt(999999999);
+
     }
     @Override
     public String toString() {
