@@ -1,6 +1,7 @@
 package main.java.com.revature.bank_application.menus;
 
 import main.java.com.revature.bank_application.services.UserAccountServices;
+import main.java.com.revature.bank_application.util.logging.Logger;
 
 import java.io.BufferedReader;
 
@@ -13,12 +14,15 @@ public class WelcomeMenu extends Menu{
 
     private UserAccountServices userAccountServices;
 
+    private final Logger logger;
+
     // The super("welcome", "/welcome", terminalReader) has to be in the method because I extended the menu class which means anything in that class has to be in this class.
     // The whole method below is telling the Welcome Menu to play once the WelcomeMenu is called in the AppState. In the WelcomeMenu parenthesis are parameters that are needed for the
     // welcome menu to be properly instantiated.
-    public WelcomeMenu( BufferedReader terminalReader, UserAccountServices userAccountServices) {
+    public WelcomeMenu( BufferedReader terminalReader, UserAccountServices userAccountServices, Logger logger) {
         super("Welcome", "/welcome", terminalReader);
         this.userAccountServices = userAccountServices;
+        this.logger = logger;
     }
 
     // This method renders the welcome menu
@@ -46,22 +50,23 @@ public class WelcomeMenu extends Menu{
         // This switch statement is a type of selection control mechanism used to allow the value of the variable or expression to change the control flow of the program execution.
         switch (userInputToEnterBankApp) {
             case "1":
-                System.out.println("User has chosen to create an account ...");
+                logger.info("User has chosen to create an account ...");
                 //registerMenu.render();
                 break;
             case "2":
-                System.out.println("User has chosen to Delete. Provide Id below ...");
+                logger.info("User has chosen to Delete. Provide Id below ...");
                 //SignInAccount.SignInAccounts();
                 String id = terminalReader.readLine();
                 userAccountServices.deleteAccount(id);
 
                 break;
             case "3":
-                System.out.println("User has chosen to view Users ...");
+                logger.info("User has chosen to view Users ...");
                 userAccountServices.readUsers();
                 break;
             case "4":
-                System.out.println("User has chosen to update their username. Please pick the user id you want to update...");
+                logger.info("User has chosen to update their username.");
+                System.out.println("Please pick the user id you want to update...");
                 String id2 = terminalReader.readLine();
                 System.out.println("Please enter the new username you would like the account to have...");
                 String userName = terminalReader.readLine();

@@ -14,6 +14,7 @@ public class RegisterMenu extends Menu {
         super("Register", "/register", terminalReader);
     }
 
+
     // Polymorphism Another pillar of OOP for the same thing doing different things
     // This is overriding a method
     @Override

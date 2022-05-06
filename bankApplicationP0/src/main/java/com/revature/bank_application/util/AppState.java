@@ -33,7 +33,7 @@ public class AppState {
         UserAccountServices userAccountServices = new UserAccountServices();
 
 
-        this.welcomeMenu = new WelcomeMenu(terminalReader, userAccountServices);
+        this.welcomeMenu = new WelcomeMenu(terminalReader, userAccountServices ,logger);
         this.registerMenu = new RegisterMenu(terminalReader);
 
     }
@@ -46,7 +46,7 @@ public class AppState {
                     // Have to manually switch between these for now.
                     welcomeMenu.render();
                     //registerMenu.render();
-                    System.out.println("Loading the welcomeMenu");
+                    logger.log("Loading the welcomeMenu");
                 }
             } catch (Exception e) {
                  e.printStackTrace();

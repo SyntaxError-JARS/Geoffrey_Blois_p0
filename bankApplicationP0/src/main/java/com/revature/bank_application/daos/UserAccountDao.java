@@ -81,7 +81,6 @@ public class UserAccountDao implements BankAccountCrudable<UserAccountData> {
                 userAccountData.setEmail(rs.getString("email"));
                 userAccountData.setPassword(rs.getString("password"));
 
-                System.out.println("Inserted User int index" + index);
                 users[index] = userAccountData;
 
                 index++;
@@ -93,9 +92,6 @@ public class UserAccountDao implements BankAccountCrudable<UserAccountData> {
             e.printStackTrace();
             return null;
         }
-
-
-        System.out.println("A New User has been created!!!");
         return users;
     }
 
