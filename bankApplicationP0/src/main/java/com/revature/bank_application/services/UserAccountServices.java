@@ -1,6 +1,8 @@
 package main.java.com.revature.bank_application.services;
 
 import main.java.com.revature.bank_application.daos.UserAccountDao;
+import main.java.com.revature.bank_application.execeptions.InvalidRequestException;
+import main.java.com.revature.bank_application.execeptions.ResourcePersistanceException;
 import main.java.com.revature.bank_application.models.UserAccountData;
 
 import java.io.IOException;
@@ -34,13 +36,13 @@ public class UserAccountServices {
     // This allows me to check to make sure that the information that the user inputs is correct before adding it to my data base.
     public boolean registerAccount(UserAccountData userAccountData) {
         if (!ValidateNewAccount(userAccountData)) {
-            throw new RuntimeException();
+            throw new InvalidRequestException("User input was not validated, either empty Sting or null values");
         }
 
         UserAccountData persistedAccount = userAccountDao.create(userAccountData);
 
         if(persistedAccount == null){
-            throw new RuntimeException();
+            throw new ResourcePersistanceException("Account was not persisted to the database upon registration");
         }
         return true;
     }

@@ -3,6 +3,7 @@ package main.java.com.revature.bank_application.util;
 import main.java.com.revature.bank_application.menus.RegisterMenu;
 import main.java.com.revature.bank_application.menus.WelcomeMenu;
 import main.java.com.revature.bank_application.services.UserAccountServices;
+import main.java.com.revature.bank_application.util.logging.Logger;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -15,10 +16,14 @@ public class AppState {
     private WelcomeMenu welcomeMenu;
     private RegisterMenu registerMenu;
 
+    private final Logger logger;
+
 
     public AppState(){
 
-        System.out.println("AppState loading");
+        logger = Logger.getLogger(true);
+
+        logger.log("AppState loading");
         // This is telling the app that the current state of this application is true
         isRunning = true;
 

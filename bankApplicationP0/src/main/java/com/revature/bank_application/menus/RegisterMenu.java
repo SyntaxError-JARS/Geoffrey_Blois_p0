@@ -1,5 +1,7 @@
 package main.java.com.revature.bank_application.menus;
 
+import main.java.com.revature.bank_application.execeptions.InvalidRequestException;
+import main.java.com.revature.bank_application.execeptions.ResourcePersistanceException;
 import main.java.com.revature.bank_application.models.UserAccountData;
 import main.java.com.revature.bank_application.services.UserAccountServices;
 
@@ -42,7 +44,13 @@ public class RegisterMenu extends Menu {
 
         UserAccountData userAccountData = new UserAccountData(username, password, firstName, lastName, email);
         System.out.println(" Here is the user account information provided by the user:"+ userAccountData);
-        userAccountServices.registerAccount(userAccountData);
+        try{
+            userAccountServices.registerAccount(userAccountData);
+
+        }catch(InvalidRequestException | ResourcePersistanceException e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
 
     }
 }
