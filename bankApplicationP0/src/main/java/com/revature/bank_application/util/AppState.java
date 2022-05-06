@@ -1,5 +1,6 @@
 package main.java.com.revature.bank_application.util;
 
+import main.java.com.revature.bank_application.menus.NewBankAccountMenu;
 import main.java.com.revature.bank_application.menus.RegisterMenu;
 import main.java.com.revature.bank_application.menus.WelcomeMenu;
 import main.java.com.revature.bank_application.services.UserAccountServices;
@@ -15,6 +16,7 @@ public class AppState {
 
     private WelcomeMenu welcomeMenu;
     private RegisterMenu registerMenu;
+    private NewBankAccountMenu newBankAccountMenu;
 
     private final Logger logger;
 
@@ -35,6 +37,7 @@ public class AppState {
 
         this.welcomeMenu = new WelcomeMenu(terminalReader, userAccountServices ,logger);
         this.registerMenu = new RegisterMenu(terminalReader);
+        this.newBankAccountMenu = new NewBankAccountMenu(terminalReader);
 
     }
 
@@ -44,8 +47,9 @@ public class AppState {
                 // While this is running it will continue to run the application.
                 while(isRunning == true) {
                     // Have to manually switch between these for now.
-                    welcomeMenu.render();
+                    //welcomeMenu.render();
                     //registerMenu.render();
+                    newBankAccountMenu.render();
                     logger.log("Loading the welcomeMenu");
                 }
             } catch (Exception e) {

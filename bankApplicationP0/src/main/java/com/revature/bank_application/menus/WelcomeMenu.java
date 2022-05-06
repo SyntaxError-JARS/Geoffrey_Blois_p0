@@ -13,6 +13,7 @@ import static main.java.com.revature.bank_application.util.AppState.shutdown;
 public class WelcomeMenu extends Menu{
 
     private UserAccountServices userAccountServices;
+    private NewBankAccountMenu newBankAccountMenu;
 
     private final Logger logger;
 
@@ -50,8 +51,10 @@ public class WelcomeMenu extends Menu{
         // This switch statement is a type of selection control mechanism used to allow the value of the variable or expression to change the control flow of the program execution.
         switch (userInputToEnterBankApp) {
             case "1":
-                logger.info("User has chosen to create an account ...");
+                //logger.info("User has chosen to create an account ...");
+                System.out.println("User has chosen to create a new bank account");
                 //registerMenu.render();
+                //newBankAccountMenu.render();
                 break;
             case "2":
                 logger.info("User has chosen to Delete. Provide Id below ...");

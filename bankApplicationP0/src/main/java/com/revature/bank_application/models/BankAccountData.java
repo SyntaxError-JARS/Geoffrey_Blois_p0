@@ -24,6 +24,9 @@ public class BankAccountData {
         this.randBankNumber = randBankNumber;
     }
 
+    public BankAccountData(String accountName, String accountAmount) {
+    }
+
     public int getBankAccountNumber() {
         return bankAccountNumber;
     }
