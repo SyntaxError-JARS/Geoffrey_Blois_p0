@@ -50,6 +50,17 @@ public class BankAccountData {
         this.hasBankAccount = hasBankAccount;
     }
 
+    public String toFileString(){
+        StringBuilder mutableString = new StringBuilder();
+        mutableString .append(bankAccountNumber)
+                      .append(",")
+                      .append(bankAccountName)
+                      .append(",")
+                      .append(bankAccountAmount)
+                      .append(",")
+                      .append(hasBankAccount);
+        return mutableString.toString();
+    }
     @Override
     public String toString() {
         return "BankAccountData{" +
