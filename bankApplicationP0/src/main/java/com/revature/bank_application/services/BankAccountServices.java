@@ -25,4 +25,8 @@ public class BankAccountServices {
         if(bankAccountData.getBankAccountNumber() == 0) return false;
         return true;
     }
+
+    public void findbyId(String bId){
+        BankAccountData findbyId = bankAccountDoa.findById(bId);
+    }
 }

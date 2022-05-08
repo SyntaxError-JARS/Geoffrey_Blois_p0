@@ -3,6 +3,7 @@ package main.java.com.revature.bank_application.util;
 import main.java.com.revature.bank_application.menus.NewBankAccountMenu;
 import main.java.com.revature.bank_application.menus.RegisterMenu;
 import main.java.com.revature.bank_application.menus.WelcomeMenu;
+import main.java.com.revature.bank_application.services.BankAccountServices;
 import main.java.com.revature.bank_application.services.UserAccountServices;
 import main.java.com.revature.bank_application.util.logging.Logger;
 
@@ -33,9 +34,10 @@ public class AppState {
         // This is in here so, I don't have to add this to every class I need a BufferedReader.(Save Memory)
         BufferedReader terminalReader = new BufferedReader(new InputStreamReader(System.in));
         UserAccountServices userAccountServices = new UserAccountServices();
+        BankAccountServices bankAccountServices = new BankAccountServices();
 
 
-        this.welcomeMenu = new WelcomeMenu(terminalReader, userAccountServices ,logger);
+        this.welcomeMenu = new WelcomeMenu(terminalReader, userAccountServices ,logger, bankAccountServices);
         this.registerMenu = new RegisterMenu(terminalReader);
         this.newBankAccountMenu = new NewBankAccountMenu(terminalReader);
 
@@ -47,9 +49,9 @@ public class AppState {
                 // While this is running it will continue to run the application.
                 while(isRunning == true) {
                     // Have to manually switch between these for now.
-                    //welcomeMenu.render();
+                    welcomeMenu.render();
                     //registerMenu.render();
-                    newBankAccountMenu.render();
+                    //newBankAccountMenu.render();
                     logger.log("Loading the welcomeMenu");
                 }
             } catch (Exception e) {

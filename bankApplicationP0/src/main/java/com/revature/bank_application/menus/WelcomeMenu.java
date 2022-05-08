@@ -1,5 +1,6 @@
 package main.java.com.revature.bank_application.menus;
 
+import main.java.com.revature.bank_application.services.BankAccountServices;
 import main.java.com.revature.bank_application.services.UserAccountServices;
 import main.java.com.revature.bank_application.util.logging.Logger;
 
@@ -13,6 +14,7 @@ import static main.java.com.revature.bank_application.util.AppState.shutdown;
 public class WelcomeMenu extends Menu{
 
     private UserAccountServices userAccountServices;
+    private BankAccountServices bankAccountServices;
     private NewBankAccountMenu newBankAccountMenu;
 
     private final Logger logger;
@@ -20,10 +22,11 @@ public class WelcomeMenu extends Menu{
     // The super("welcome", "/welcome", terminalReader) has to be in the method because I extended the menu class which means anything in that class has to be in this class.
     // The whole method below is telling the Welcome Menu to play once the WelcomeMenu is called in the AppState. In the WelcomeMenu parenthesis are parameters that are needed for the
     // welcome menu to be properly instantiated.
-    public WelcomeMenu( BufferedReader terminalReader, UserAccountServices userAccountServices, Logger logger) {
+    public WelcomeMenu( BufferedReader terminalReader, UserAccountServices userAccountServices, Logger logger, BankAccountServices bankAccountServices) {
         super("Welcome", "/welcome", terminalReader);
         this.userAccountServices = userAccountServices;
         this.logger = logger;
+        this.bankAccountServices = bankAccountServices;
     }
 
     // This method renders the welcome menu
@@ -55,6 +58,11 @@ public class WelcomeMenu extends Menu{
                 System.out.println("User has chosen to create a new bank account");
                 //registerMenu.render();
                 //newBankAccountMenu.render();
+
+
+                // Bank Find with ID
+                String bId = terminalReader.readLine();
+                bankAccountServices.findbyId(bId);
                 break;
             case "2":
                 logger.info("User has chosen to Delete. Provide Id below ...");

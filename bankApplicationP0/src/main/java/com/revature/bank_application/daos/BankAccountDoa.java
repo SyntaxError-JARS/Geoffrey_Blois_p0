@@ -8,6 +8,7 @@ import main.java.com.revature.bank_application.util.ConnectionFactory;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class BankAccountDoa implements BankAccountCrudable<BankAccountData>{
@@ -15,6 +16,7 @@ public class BankAccountDoa implements BankAccountCrudable<BankAccountData>{
     public BankAccountData create(BankAccountData bankAccountData) {
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
+            UserAccountData userAccountData = new UserAccountData();
             // TODO: add the id or username so it adds to the right account
             String sql = "insert into bankaccount values(default, ?, ?, ?, true)";
 
@@ -23,6 +25,7 @@ public class BankAccountDoa implements BankAccountCrudable<BankAccountData>{
             ps.setInt(1, BankAccountData.randomBankAccountNumber());
             ps.setString(2, bankAccountData.getBankAccountName());
             ps.setInt(3, bankAccountData.getBankAccountAmount());
+            //ps.setString(4, userAccountData.getUserName());
 
             int checkInsert = ps.executeUpdate();
 
@@ -44,8 +47,29 @@ public class BankAccountDoa implements BankAccountCrudable<BankAccountData>{
     }
 
     @Override
-    public BankAccountData findById(String id) {
-        return null;
+    public BankAccountData findById(String bId) {
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+
+            String sql = "select * from bankaccount where bank_id=?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, Integer.parseInt(bId));
+
+            ResultSet rs = ps.executeQuery();
+
+            BankAccountData bankAccountData =new BankAccountData();
+
+            bankAccountData.setBankAccountNumber(rs.getInt("bank_account_number"));
+            bankAccountData.setBankAccountName(rs.getString("bank_account_name"));
+            bankAccountData.setBankAccountNumber(rs.getInt("bank_account_amount"));
+
+            return bankAccountData;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

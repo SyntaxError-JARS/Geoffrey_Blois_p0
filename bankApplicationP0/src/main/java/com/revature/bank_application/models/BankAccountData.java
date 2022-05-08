@@ -15,7 +15,7 @@ public class BankAccountData {
     private int randBankNumber;
 
 
-    public BankAccountData(int bankAccountNumber, String bankAccountName, int bankAccountAmount, boolean hasBankAccount, int randBankNumber){
+    public BankAccountData(String bankAccountName, int bankAccountAmount){
         super();
         this.bankAccountNumber = bankAccountNumber;
         this.bankAccountName = bankAccountName;
@@ -24,8 +24,9 @@ public class BankAccountData {
         this.randBankNumber = randBankNumber;
     }
 
-    public BankAccountData(String accountName, String accountAmount) {
+    public BankAccountData( ){
     }
+
 
     public int getBankAccountNumber() {
         return bankAccountNumber;
@@ -46,11 +47,9 @@ public class BankAccountData {
     public int getBankAccountAmount() {
         return bankAccountAmount;
     }
-
-    // TODO: This should not be Here!!!!!!!!!!!!
-//    public void setBankAccountAmount(int bankAccountAmount) {
-//        this.bankAccountAmount = bankAccountAmount;
-//    }
+    public void setBankAccountAmount(int bankAccountAmount) {
+        this.bankAccountAmount = bankAccountAmount;
+    }
 
     public void getHasBankAccount(boolean hasBankAccount){
         this.hasBankAccount = hasBankAccount;
