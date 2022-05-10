@@ -8,7 +8,7 @@
 
     <servlet>
         <servlet-name>TestServlet</servlet-name>
-        <servlet-class>com.revature.servlets.TestServlet</servlet-class>
+        <servlet-class>com.revature.bank_application.web.servlets.TestServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

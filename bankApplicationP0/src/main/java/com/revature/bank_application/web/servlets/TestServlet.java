@@ -1,4 +1,4 @@
-package com.revature.servlets;
+package com.revature.bank_application.web.servlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
