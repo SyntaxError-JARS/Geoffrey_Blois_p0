@@ -1,4 +1,4 @@
-package main.java.com.revature.bank_application.models;
+package com.revature.bank_application.models;
 
 public class UserAccountData {
 

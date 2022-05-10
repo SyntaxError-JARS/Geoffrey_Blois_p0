@@ -1,4 +1,4 @@
-package main.java.com.revature.bank_application.util;
+package com.revature.bank_application.util;
 
 // Design patterns
 

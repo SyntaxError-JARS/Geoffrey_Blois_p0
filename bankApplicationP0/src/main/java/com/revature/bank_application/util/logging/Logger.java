@@ -1,4 +1,4 @@
-package main.java.com.revature.bank_application.util.logging;
+package com.revature.bank_application.util.logging;
 
 import java.io.FileWriter;
 import java.io.IOException;

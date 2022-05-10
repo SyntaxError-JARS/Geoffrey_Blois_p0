@@ -1,9 +1,9 @@
-package main.java.com.revature.bank_application.daos;
+package com.revature.bank_application.daos;
 
-import main.java.com.revature.bank_application.execeptions.BankAccountInsertDataException;
-import main.java.com.revature.bank_application.models.BankAccountData;
-import main.java.com.revature.bank_application.models.UserAccountData;
-import main.java.com.revature.bank_application.util.ConnectionFactory;
+import com.revature.bank_application.execeptions.BankAccountInsertDataException;
+import com.revature.bank_application.models.BankAccountData;
+import com.revature.bank_application.models.UserAccountData;
+import com.revature.bank_application.util.ConnectionFactory;
 
 import java.io.IOException;
 import java.sql.Connection;

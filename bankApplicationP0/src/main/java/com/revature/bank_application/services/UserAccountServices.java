@@ -1,9 +1,9 @@
-package main.java.com.revature.bank_application.services;
+package com.revature.bank_application.services;
 
-import main.java.com.revature.bank_application.daos.UserAccountDao;
-import main.java.com.revature.bank_application.execeptions.InvalidRequestException;
-import main.java.com.revature.bank_application.execeptions.ResourcePersistanceException;
-import main.java.com.revature.bank_application.models.UserAccountData;
+import com.revature.bank_application.daos.UserAccountDao;
+import com.revature.bank_application.execeptions.InvalidRequestException;
+import com.revature.bank_application.execeptions.ResourcePersistanceException;
+import com.revature.bank_application.models.UserAccountData;
 
 import java.io.IOException;
 

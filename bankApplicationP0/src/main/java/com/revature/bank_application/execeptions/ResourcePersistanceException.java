@@ -1,4 +1,4 @@
-package main.java.com.revature.bank_application.execeptions;
+package com.revature.bank_application.execeptions;
 
 public class ResourcePersistanceException extends RuntimeException{
 

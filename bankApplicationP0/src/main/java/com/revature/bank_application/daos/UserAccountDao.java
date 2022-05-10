@@ -1,7 +1,7 @@
-package main.java.com.revature.bank_application.daos;
+package com.revature.bank_application.daos;
 
-import main.java.com.revature.bank_application.models.UserAccountData;
-import main.java.com.revature.bank_application.util.ConnectionFactory;
+import com.revature.bank_application.models.UserAccountData;
+import com.revature.bank_application.util.ConnectionFactory;
 
 import java.io.*;
 import java.sql.*;

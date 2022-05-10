@@ -1,8 +1,8 @@
-package main.java.com.revature.bank_application.services;
+package com.revature.bank_application.services;
 
-import main.java.com.revature.bank_application.daos.BankAccountDoa;
-import main.java.com.revature.bank_application.execeptions.ResourcePersistanceException;
-import main.java.com.revature.bank_application.models.BankAccountData;
+import com.revature.bank_application.daos.BankAccountDoa;
+import com.revature.bank_application.execeptions.ResourcePersistanceException;
+import com.revature.bank_application.models.BankAccountData;
 
 public class BankAccountServices {
 
