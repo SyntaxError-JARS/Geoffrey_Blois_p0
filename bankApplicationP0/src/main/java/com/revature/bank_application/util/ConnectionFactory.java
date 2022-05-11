@@ -2,7 +2,6 @@ package com.revature.bank_application.util;
 
 // Design patterns
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -29,7 +28,8 @@ public class ConnectionFactory {
 
     private ConnectionFactory(){
         try {
-            prop.load(new FileReader("src/main/resources/db.properties"));
+            ClassLoader Loader = Thread.currentThread().getContextClassLoader();
+            prop.load(Loader.getResourceAsStream("db.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
