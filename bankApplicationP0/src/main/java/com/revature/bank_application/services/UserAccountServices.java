@@ -1,6 +1,7 @@
 package com.revature.bank_application.services;
 
 import com.revature.bank_application.daos.UserAccountDao;
+import com.revature.bank_application.execeptions.AuthenticationException;
 import com.revature.bank_application.execeptions.InvalidRequestException;
 import com.revature.bank_application.execeptions.ResourcePersistanceException;
 import com.revature.bank_application.models.UserAccountData;
@@ -9,7 +10,11 @@ import java.io.IOException;
 
 public class UserAccountServices {
 
-    private UserAccountDao userAccountDao = new UserAccountDao();
+    private UserAccountDao userAccountDao;
+
+    public UserAccountServices(UserAccountDao userAccountDao) {
+        this.userAccountDao = userAccountDao;
+    }
 
 
     public void readUsers(){
@@ -70,4 +75,17 @@ public class UserAccountServices {
         boolean updateAccount = userAccountDao.update(id2, userName);
     }
 
+    public UserAccountData authenticateUser(String email, String password){
+        if(password == null || password.trim().equals("") || email == null || email.trim().equals("")){
+            throw new InvalidRequestException("Either username or email is an invalid entry. Please try logging in again");
+
+        }
+        UserAccountData authenticatedUser = userAccountDao.authenticateUser(email, password);
+
+        if(authenticatedUser == null){
+            throw new AuthenticationException("Unauthenticated user, information provided was not consistent with our database");
+        }
+
+        return authenticatedUser;
+    }
 }

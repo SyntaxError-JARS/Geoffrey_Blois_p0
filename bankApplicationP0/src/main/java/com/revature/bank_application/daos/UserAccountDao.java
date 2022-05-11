@@ -186,4 +186,36 @@ public class UserAccountDao implements BankAccountCrudable<UserAccountData> {
 
         }
     }
+
+    public UserAccountData authenticateUser(String email, String password){
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+
+            String sql = "select * from useraccount where email= ? and password=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setString(2, password);
+
+            ResultSet rs = ps.executeQuery();
+
+            UserAccountData userAccountData = new UserAccountData();
+
+            if(!rs.next()){
+                return null;
+            }
+
+            userAccountData.setUserName(userAccountData.getUserName());
+            userAccountData.setPassword(userAccountData.getPassword());
+            userAccountData.setEmail(userAccountData.getEmail());
+            userAccountData.setFirstName(userAccountData.getFirstName());
+            userAccountData.setLastName(userAccountData.getLastName());
+
+            return userAccountData;
+
+
+
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
