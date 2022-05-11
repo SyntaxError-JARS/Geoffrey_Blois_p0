@@ -17,11 +17,11 @@ public class UserAccountServices {
     }
 
 
-    public void readUsers(){
+    public UserAccountData[] readUsers(){
 
-        UserAccountData[] userAccountData = new UserAccountData[0];
+        //UserAccountData[] userAccountData = new UserAccountData[0];
         try{
-            userAccountData = userAccountDao.findAll();
+            UserAccountData[] userAccountData = userAccountDao.findAll();
 //            for (int i = 0; i < userAccountData.length; i++){
 //                UserAccountData userAccountData1 = userAccountData[i];
 //                System.out.println(userAccountData1.toString());
@@ -33,9 +33,13 @@ public class UserAccountServices {
                 }
             }
 
-        }catch (IOException | NullPointerException e){
+            return userAccountData;
 
+        }catch (IOException | NullPointerException e){
+            e.printStackTrace();
+            return null;
         }
+
     }
 
     // This allows me to check to make sure that the information that the user inputs is correct before adding it to my data base.

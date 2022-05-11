@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.bank_application.daos.UserAccountDao;
 import com.revature.bank_application.services.UserAccountServices;
 import com.revature.bank_application.web.servlets.AuthServlet;
+import com.revature.bank_application.web.servlets.UserServlet;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -20,10 +21,13 @@ public class ContextLoaderListener implements ServletContextListener {
         UserAccountServices userAccountServices = new UserAccountServices(userAccountDao);
 
         AuthServlet authServlet = new AuthServlet(userAccountServices, mapper);
+        UserServlet userServlet = new UserServlet(userAccountServices, mapper);
         // TODO: add a user servlet
 
         ServletContext context = sce.getServletContext();
         context.addServlet("AuthServlet", authServlet).addMapping("/auth");
+        context.addServlet("UserServlet", userServlet).addMapping("/user/*");
+        context.addServlet("UserServlet", userServlet).addMapping("user/newuser");
 
     }
 
