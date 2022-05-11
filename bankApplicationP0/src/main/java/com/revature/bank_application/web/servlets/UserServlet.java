@@ -5,6 +5,7 @@ import com.revature.bank_application.execeptions.InvalidRequestException;
 import com.revature.bank_application.execeptions.ResourcePersistanceException;
 import com.revature.bank_application.models.UserAccountData;
 import com.revature.bank_application.services.UserAccountServices;
+import com.revature.bank_application.web.dto.UserDeleteCreds;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -44,10 +45,33 @@ public class UserServlet extends HttpServlet {
             httpSession.setAttribute("newUser", newUser);
 
             resp.setStatus(200);
+            resp.getWriter().write("You have successfully created a new user account!");
         }catch (InvalidRequestException | ResourcePersistanceException e) {
             resp.setStatus(404);
             resp.getWriter().write(e.getMessage());
         }catch (Exception e){
+            resp.setStatus(409);
+            resp.getWriter().write(e.getMessage());
+        }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        try {
+            UserDeleteCreds userDeleteCreds = mapper.readValue(req.getInputStream(), UserDeleteCreds.class);
+            UserAccountData deleteUser = userAccountServices.deleteAccount(userDeleteCreds.getId());
+
+            HttpSession httpSession = req.getSession(true);
+            httpSession.setAttribute("deleteUser", deleteUser);
+
+            resp.setStatus(200);
+            resp.getWriter().write("You have successfully deleted a new user account!");
+
+        }catch (InvalidRequestException | ResourcePersistanceException e) {
+            resp.setStatus(404);
+            resp.getWriter().write(e.getMessage());
+        }catch (Exception e) {
             resp.setStatus(409);
             resp.getWriter().write(e.getMessage());
         }

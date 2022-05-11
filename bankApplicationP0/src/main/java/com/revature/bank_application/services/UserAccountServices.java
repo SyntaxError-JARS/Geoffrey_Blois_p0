@@ -68,11 +68,11 @@ public class UserAccountServices {
         return true;
     }
 
-    public void deleteAccount(String id){
-        UserAccountData userAccountData = new UserAccountData();
+    public UserAccountData deleteAccount(String id){
 
         boolean deleteAccount = userAccountDao.delete(id);
 
+        return null;
     }
 
     public void updateAccount(String id2, String userName){

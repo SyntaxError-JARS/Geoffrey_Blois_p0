@@ -22,12 +22,13 @@ public class ContextLoaderListener implements ServletContextListener {
 
         AuthServlet authServlet = new AuthServlet(userAccountServices, mapper);
         UserServlet userServlet = new UserServlet(userAccountServices, mapper);
+
         // TODO: add a user servlet
 
         ServletContext context = sce.getServletContext();
         context.addServlet("AuthServlet", authServlet).addMapping("/auth");
         context.addServlet("UserServlet", userServlet).addMapping("/user/*");
-        context.addServlet("UserServlet", userServlet).addMapping("user/newuser");
+
 
     }
 
