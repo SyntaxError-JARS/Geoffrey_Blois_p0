@@ -5,6 +5,7 @@ import com.revature.bank_application.execeptions.InvalidRequestException;
 import com.revature.bank_application.execeptions.ResourcePersistanceException;
 import com.revature.bank_application.models.UserAccountData;
 import com.revature.bank_application.services.UserAccountServices;
+import com.revature.bank_application.util.logging.Logger;
 import com.revature.bank_application.web.dto.UserDeleteCreds;
 import com.revature.bank_application.web.dto.UserUpdateCreds;
 
@@ -19,6 +20,7 @@ public class UserServlet extends HttpServlet {
 
     private final UserAccountServices userAccountServices;
     private final ObjectMapper mapper;
+    private final Logger logger = Logger.getLogger(true);
 
     public UserServlet(UserAccountServices userAccountServices, ObjectMapper mapper) {
         this.userAccountServices = userAccountServices;
@@ -27,9 +29,30 @@ public class UserServlet extends HttpServlet {
 
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, NumberFormatException {
 
         if(!checkAuth(req, resp)) return;
+//        String pathInfo = req.getPathInfo();
+//        String[] pathParts = pathInfo.split("/");
+//        System.out.println(pathParts[0] + pathParts[1]);
+
+        if(req.getParameter("id") != null){
+            UserAccountData userAccountData;
+            try {
+                resp.getWriter().write("Grabbing User! \n");
+                userAccountData = userAccountServices.findByID(req.getParameter("id"));
+            }catch (ResourcePersistanceException e){
+                logger.warn(e.getMessage());
+                resp.setStatus(404);
+                resp.getWriter().write(e.getMessage());
+                return;
+            }
+            String payload = mapper.writeValueAsString(userAccountData);
+            resp.getWriter().write("You have successfully looked up a new user account!\n");
+            resp.getWriter().write(payload);
+            return;
+
+        }
 
         UserAccountData[] userAccountData = userAccountServices.readUsers();
 
@@ -45,11 +68,13 @@ public class UserServlet extends HttpServlet {
             UserAccountData userAccountData = mapper.readValue(req.getInputStream(), UserAccountData.class);
             boolean newUser = userAccountServices.registerAccount(userAccountData);
 
-            HttpSession httpSession = req.getSession(true);
-            httpSession.setAttribute("newUser", newUser);
+            String payload = mapper.writeValueAsString(newUser);
 
-            resp.setStatus(200);
+            // TODO: Replace the HttpSession with this for the rest of the methods.
             resp.getWriter().write("You have successfully created a new user account!");
+            resp.getWriter().write(payload);
+            resp.setStatus(200);
+
         }catch (InvalidRequestException | ResourcePersistanceException e) {
             resp.setStatus(404);
             resp.getWriter().write(e.getMessage());

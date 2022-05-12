@@ -1,9 +1,10 @@
 package com.revature.bank_application.daos;
 
+import com.revature.bank_application.execeptions.ResourcePersistanceException;
 import com.revature.bank_application.models.UserAccountData;
 import com.revature.bank_application.util.ConnectionFactory;
 
-import java.io.*;
+import java.io.IOException;
 import java.sql.*;
 
 
@@ -110,6 +111,10 @@ public class UserAccountDao implements BankAccountCrudable<UserAccountData> {
 
             //This is executing a query which can only be used with select.
             ResultSet rs = ps.executeQuery();
+
+            if(!rs.next()){
+                throw new ResourcePersistanceException("User was not found in the database, please check ID entered was correct.");
+            }
 
             // This is creating a new user object to display the information requested.
             UserAccountData userAccountData = new UserAccountData();

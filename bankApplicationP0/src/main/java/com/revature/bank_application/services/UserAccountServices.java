@@ -42,6 +42,7 @@ public class UserAccountServices {
 
     }
 
+
     // This allows me to check to make sure that the information that the user inputs is correct before adding it to my data base.
     public boolean registerAccount(UserAccountData userAccountData) {
         if (!ValidateNewAccount(userAccountData)) {
@@ -80,6 +81,12 @@ public class UserAccountServices {
         return updateAccount;
     }
 
+    public UserAccountData findByID(String id){
+
+        UserAccountData findUserById = userAccountDao.findById(id);
+
+        return findUserById;
+    }
     public UserAccountData authenticateUser(String email, String password){
         if(password == null || password.trim().equals("") || email == null || email.trim().equals("")){
             throw new InvalidRequestException("Either username or email is an invalid entry. Please try logging in again");

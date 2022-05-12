@@ -1,11 +1,13 @@
 package com.revature.bank_application.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class UserAccountData {
 
     // These are creating private strings that only this script can see.
     // Using the pillar of the OOP Encapsulation
     private String userName;
-    //@JasonIgnore TODO: Need to figure out why this won't work.
+    @JsonIgnore
     private String password;
     private String firstName;
     private String lastName;

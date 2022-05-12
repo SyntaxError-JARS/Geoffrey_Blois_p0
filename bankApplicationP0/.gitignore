@@ -3,3 +3,4 @@ bankApplicationP0.iml
 out/
 src/main/resources/db.properties
 target/
+collection/
