@@ -3,7 +3,7 @@
 -- times withdrew money, has bank account (all in that order)
 insert into bankaccount 
 values
-(10, 15, 'Checking Account', 10000, true);
+(1, 15, 'Checking Account', 10000, true);
 
 
 
@@ -11,7 +11,7 @@ values
 -- The info that needs to be inserted is: id, user name, password, eamil, First name, Last Name, times user loged in (all in that order)
 insert into useraccount 
 values
-(10, 'Luculentmovie00', 'Pass', 'gblois@yahoo.com','Geoffrey', 'Blois', 35);
+(1, 'Luculentmovie00', 'Pass', 'gblois@yahoo.com','Geoffrey', 'Blois', 35);
 
 -- Adding data to the transacion table
 -- The info that need to be add into the table is:id number account number, type of transaction, Memo of transaction.

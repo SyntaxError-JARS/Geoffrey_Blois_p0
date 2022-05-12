@@ -33,12 +33,14 @@ public class BankAccountDoa implements BankAccountCrudable<BankAccountData>{
                 throw new BankAccountInsertDataException("The sql statement came back as 0. Please check the information inputted or the String sql above");
             }
 
+            return bankAccountData;
 
 
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
+
     }
 
     @Override
