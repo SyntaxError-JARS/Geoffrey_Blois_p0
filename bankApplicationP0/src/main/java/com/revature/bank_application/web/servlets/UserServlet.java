@@ -28,6 +28,9 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        if(!checkAuth(req, resp)) return;
+
         UserAccountData[] userAccountData = userAccountServices.readUsers();
 
         String payload = mapper.writeValueAsString(userAccountData);
@@ -97,5 +100,15 @@ public class UserServlet extends HttpServlet {
             resp.setStatus(409);
             resp.getWriter().write(e.getMessage());
         }
+    }
+
+    protected boolean checkAuth(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        HttpSession httpSession = req.getSession();
+        if(httpSession.getAttribute("authUser") == null){
+            resp.getWriter().write("Unauthorized request - not logged in as register user ");
+            resp.setStatus(401);
+            return false;
+        }
+        return true;
     }
 }

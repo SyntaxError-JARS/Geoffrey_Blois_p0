@@ -5,6 +5,7 @@ public class UserAccountData {
     // These are creating private strings that only this script can see.
     // Using the pillar of the OOP Encapsulation
     private String userName;
+    //@JasonIgnore TODO: Need to figure out why this won't work.
     private String password;
     private String firstName;
     private String lastName;
