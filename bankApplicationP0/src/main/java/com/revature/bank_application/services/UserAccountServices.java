@@ -75,8 +75,9 @@ public class UserAccountServices {
         return null;
     }
 
-    public void updateAccount(String id2, String userName){
+    public boolean updateAccount(String id2, String userName){
         boolean updateAccount = userAccountDao.update(id2, userName);
+        return updateAccount;
     }
 
     public UserAccountData authenticateUser(String email, String password){

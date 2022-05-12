@@ -6,6 +6,7 @@ import com.revature.bank_application.execeptions.ResourcePersistanceException;
 import com.revature.bank_application.models.UserAccountData;
 import com.revature.bank_application.services.UserAccountServices;
 import com.revature.bank_application.web.dto.UserDeleteCreds;
+import com.revature.bank_application.web.dto.UserUpdateCreds;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -67,6 +68,27 @@ public class UserServlet extends HttpServlet {
 
             resp.setStatus(200);
             resp.getWriter().write("You have successfully deleted a new user account!");
+
+        }catch (InvalidRequestException | ResourcePersistanceException e) {
+            resp.setStatus(404);
+            resp.getWriter().write(e.getMessage());
+        }catch (Exception e) {
+            resp.setStatus(409);
+            resp.getWriter().write(e.getMessage());
+        }
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            UserUpdateCreds userUpdateCreds = mapper.readValue(req.getInputStream(), UserUpdateCreds.class);
+            boolean updateUser = userAccountServices.updateAccount(userUpdateCreds.getId2(), userUpdateCreds.getUserName());
+
+            HttpSession httpSession = req.getSession(true);
+            httpSession.setAttribute("updateUser", updateUser);
+
+            resp.setStatus(200);
+            resp.getWriter().write("You have successfully updated a new user account!");
 
         }catch (InvalidRequestException | ResourcePersistanceException e) {
             resp.setStatus(404);
