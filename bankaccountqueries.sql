@@ -74,6 +74,7 @@ where account_number=10;
 
 
 update bankaccount set bank_account_amount = bank_account_amount + 1000 where bank_id = 3;
+update bankaccount set bank_account_amount = bank_account_amount - 1000 where bank_id = 6;
 
 
 
