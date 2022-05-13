@@ -149,5 +149,39 @@ public class BankAccountDoa implements BankAccountCrudable<BankAccountData>{
         }
     }
 
+    public BankAccountData deposit(String deposit, String id){
+
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+
+            String sql = "update bankaccount set bank_account_amount = bank_account_amount + ? where bank_id = ?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1 , Integer.parseInt(deposit));
+            ps.setInt(2, Integer.parseInt(id));
+
+            ps.executeUpdate();
+
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        return null;
+    }
+
+    public double withdraw(){
+
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+
+
+
+
+            return 0;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 
 }

@@ -68,7 +68,7 @@ public class AccountServlet extends HttpServlet {
             String payload = mapper.writeValueAsString(newBankAccount);
 
 
-            resp.getWriter().write("You have successfully created a new user account!");
+            resp.getWriter().write("You have successfully created a new bank account!");
             resp.getWriter().write(payload);
             resp.setStatus(200);
         } catch (InvalidRequestException | ResourcePersistanceException e) {
@@ -83,24 +83,25 @@ public class AccountServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            try {
+                UpdateBankAccountCreds newBankName = mapper.readValue(req.getInputStream(), UpdateBankAccountCreds.class);
+                boolean newBankAccountName = bankAccountServices.updateBankAccountName(newBankName.getId2(), newBankName.getNewBankAccountName());
 
-        try {
-            UpdateBankAccountCreds newBankName = mapper.readValue(req.getInputStream(), UpdateBankAccountCreds.class);
-            boolean newBankAccountName = bankAccountServices.updateBankAccountName(newBankName.getId2(), newBankName.getNewBankAccountName());
+                String payload = mapper.writeValueAsString(newBankAccountName);
 
-            String payload = mapper.writeValueAsString(newBankAccountName);
-
-            resp.getWriter().write("You have successfully updated your Bank Account Name");
-            resp.getWriter().write(payload);
-            resp.setStatus(200);
-        }catch (InvalidRequestException | ResourcePersistanceException e) {
-            resp.setStatus(404);
-            resp.getWriter().write(e.getMessage());
-        } catch (Exception e) {
-            resp.setStatus(409);
-            resp.getWriter().write(e.getMessage());
-        }
+                resp.getWriter().write("You have successfully updated your Bank Account Name");
+                resp.getWriter().write(payload);
+                resp.setStatus(200);
+            } catch (InvalidRequestException | ResourcePersistanceException e) {
+                resp.setStatus(404);
+                resp.getWriter().write(e.getMessage());
+            } catch (Exception e) {
+                resp.setStatus(409);
+                resp.getWriter().write(e.getMessage());
+            }
     }
+
+
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

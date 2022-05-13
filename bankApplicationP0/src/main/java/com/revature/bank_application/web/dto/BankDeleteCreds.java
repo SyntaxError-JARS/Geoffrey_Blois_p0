@@ -4,6 +4,12 @@ public class BankDeleteCreds {
 
    private String id;
 
+   private String deposit;
+
+
+    public String getDeposit() {
+        return deposit;
+    }
 
     public String getId() {
         return id;

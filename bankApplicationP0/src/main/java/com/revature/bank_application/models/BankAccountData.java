@@ -14,6 +14,10 @@ public class BankAccountData {
 
     private int randBankNumber;
 
+    private double addMoneyToAccount;
+    private double subtractMoneyToAccount;
+
+
 
     public BankAccountData(String bankAccountName, int bankAccountAmount){
         super();
@@ -49,6 +53,14 @@ public class BankAccountData {
     }
     public void setBankAccountAmount(int bankAccountAmount) {
         this.bankAccountAmount = bankAccountAmount;
+    }
+
+    public double getAddMoneyToAccount() {
+        return addMoneyToAccount;
+    }
+
+    public double getSubtractMoneyToAccount() {
+        return subtractMoneyToAccount;
     }
 
     public void getHasBankAccount(boolean hasBankAccount){

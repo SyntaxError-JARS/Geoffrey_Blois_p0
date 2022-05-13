@@ -72,3 +72,12 @@ where bank_account_number=10;
 delete from transactiontable
 where account_number=10;
 
+
+update bankaccount set bank_account_amount = bank_account_amount + 1000 where bank_id = 3;
+
+
+
+
+
+
+

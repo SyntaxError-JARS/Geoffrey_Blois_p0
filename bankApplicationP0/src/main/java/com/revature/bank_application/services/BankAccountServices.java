@@ -59,4 +59,11 @@ public class BankAccountServices {
         return deletedBankAccount;
     }
 
+    public BankAccountData deposit(String deposit, String id){
+        BankAccountData depositInAccount = bankAccountDoa.deposit(deposit, id);
+
+        return depositInAccount;
+
+    }
+
 }
