@@ -70,6 +70,9 @@ public class UserServlet extends HttpServlet {
 
             String payload = mapper.writeValueAsString(newUser);
 
+            //HttpSession httpSession = req.getSession(true);
+            //httpSession.setAttribute("newUser", newUser);
+
             // TODO: Replace the HttpSession with this for the rest of the methods.
             resp.getWriter().write("You have successfully created a new user account!");
             resp.getWriter().write(payload);

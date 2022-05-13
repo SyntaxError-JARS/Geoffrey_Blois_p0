@@ -47,8 +47,9 @@ public class UserAccountServices {
     public boolean registerAccount(UserAccountData userAccountData) {
         if (!ValidateNewAccount(userAccountData)) {
             throw new InvalidRequestException("User input was not validated, either empty Sting or null values");
-        }
 
+        }
+        System.out.println("User is Valid");
         UserAccountData persistedAccount = userAccountDao.create(userAccountData);
 
         if(persistedAccount == null){
