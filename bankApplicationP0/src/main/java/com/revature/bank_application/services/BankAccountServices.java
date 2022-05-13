@@ -46,4 +46,11 @@ public class BankAccountServices {
         return findAll;
     }
 
+    public boolean updateBankAccountName(String id2, String newBankAccountName){
+        boolean updatedBankAccount = bankAccountDoa.update(id2, newBankAccountName);
+
+        return updatedBankAccount;
+
+    }
+
 }

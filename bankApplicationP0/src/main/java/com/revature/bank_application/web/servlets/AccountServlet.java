@@ -5,6 +5,7 @@ import com.revature.bank_application.execeptions.InvalidRequestException;
 import com.revature.bank_application.execeptions.ResourcePersistanceException;
 import com.revature.bank_application.models.BankAccountData;
 import com.revature.bank_application.services.BankAccountServices;
+import com.revature.bank_application.web.dto.UpdateBankAccountCreds;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -79,6 +80,26 @@ public class AccountServlet extends HttpServlet {
 
     }
 
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        try {
+            UpdateBankAccountCreds newBankName = mapper.readValue(req.getInputStream(), UpdateBankAccountCreds.class);
+            boolean newBankAccountName = bankAccountServices.updateBankAccountName(newBankName.getId2(), newBankName.getNewBankAccountName());
+
+            String payload = mapper.writeValueAsString(newBankAccountName);
+
+            resp.getWriter().write("You have successfully updated your Bank Account Name");
+            resp.getWriter().write(payload);
+            resp.setStatus(200);
+        }catch (InvalidRequestException | ResourcePersistanceException e) {
+            resp.setStatus(404);
+            resp.getWriter().write(e.getMessage());
+        } catch (Exception e) {
+            resp.setStatus(409);
+            resp.getWriter().write(e.getMessage());
+        }
+    }
 
     protected boolean checkAuth(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession httpSession = req.getSession();
