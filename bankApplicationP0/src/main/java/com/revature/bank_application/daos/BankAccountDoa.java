@@ -96,7 +96,7 @@ public class BankAccountDoa implements BankAccountCrudable<BankAccountData>{
 
             bankAccountData.setBankAccountNumber(rs.getInt("bank_account_number"));
             bankAccountData.setBankAccountName(rs.getString("bank_account_name"));
-            bankAccountData.setBankAccountNumber(rs.getInt("bank_account_amount"));
+            bankAccountData.setBankAccountAmount(rs.getInt("bank_account_amount"));
 
             return bankAccountData;
 
