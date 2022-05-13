@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class AccountServlet extends HttpServlet {
 
@@ -45,8 +46,13 @@ public class AccountServlet extends HttpServlet {
             resp.getWriter().write("You have successfully looked up a bank account!\n");
             resp.getWriter().write(payload);
             return;
-
         }
+
+        ArrayList<BankAccountData> bankAccountData = bankAccountServices.findAll();
+
+        String payload = mapper.writeValueAsString(bankAccountData);
+
+        resp.getWriter().write(payload);
 
     }
 

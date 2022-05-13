@@ -7,10 +7,7 @@ import com.revature.bank_application.models.UserAccountData;
 import com.revature.bank_application.util.ConnectionFactory;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class BankAccountDoa implements BankAccountCrudable<BankAccountData>{
@@ -47,7 +44,36 @@ public class BankAccountDoa implements BankAccountCrudable<BankAccountData>{
 
     @Override
     public ArrayList<BankAccountData> findAll() throws IOException {
-        return new ArrayList<>();
+
+        ArrayList<BankAccountData> bankAccounts = new ArrayList<>();
+
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection();){ // try with resource, because connection extends the interface Auto-closes
+
+            String sql = "select * from bankaccount";
+
+            Statement s = conn.createStatement();
+
+            s.executeQuery(sql);
+
+            ResultSet rs = s.executeQuery(sql);
+
+            while (rs.next()) {
+
+                BankAccountData bankAccountData = new BankAccountData();
+                bankAccountData.setBankAccountAmount(rs.getInt("bank_account_number"));
+                bankAccountData.setBankAccountName(rs.getString("bank_account_name"));
+                bankAccountData.setBankAccountAmount(rs.getInt("bank_account_amount"));
+
+                bankAccounts.add(bankAccountData);
+
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return bankAccounts;
     }
 
     @Override

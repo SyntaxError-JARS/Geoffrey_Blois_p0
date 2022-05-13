@@ -3,6 +3,9 @@ package com.revature.bank_application.services;
 import com.revature.bank_application.daos.BankAccountDoa;
 import com.revature.bank_application.models.BankAccountData;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 public class BankAccountServices {
 
     private BankAccountDoa bankAccountDoa;
@@ -34,6 +37,13 @@ public class BankAccountServices {
         BankAccountData findbyId = bankAccountDoa.findById(bId);
 
         return findbyId;
+    }
+
+    public ArrayList<BankAccountData> findAll() throws IOException {
+
+        ArrayList<BankAccountData> findAll = bankAccountDoa.findAll();
+
+        return findAll;
     }
 
 }
