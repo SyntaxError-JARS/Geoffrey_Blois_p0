@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class BankAccountDoa implements BankAccountCrudable<BankAccountData>{
     @Override
@@ -45,8 +46,8 @@ public class BankAccountDoa implements BankAccountCrudable<BankAccountData>{
     }
 
     @Override
-    public UserAccountData[] findAll() throws IOException {
-        return new UserAccountData[0];
+    public ArrayList<BankAccountData> findAll() throws IOException {
+        return new ArrayList<>();
     }
 
     @Override

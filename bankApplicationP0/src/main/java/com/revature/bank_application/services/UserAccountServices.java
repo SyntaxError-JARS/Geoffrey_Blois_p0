@@ -7,6 +7,7 @@ import com.revature.bank_application.execeptions.ResourcePersistanceException;
 import com.revature.bank_application.models.UserAccountData;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class UserAccountServices {
 
@@ -17,11 +18,11 @@ public class UserAccountServices {
     }
 
 
-    public UserAccountData[] readUsers(){
+    public ArrayList<UserAccountData> readUsers(){
 
         //UserAccountData[] userAccountData = new UserAccountData[0];
         try{
-            UserAccountData[] userAccountData = userAccountDao.findAll();
+            ArrayList<UserAccountData> userAccountData = userAccountDao.findAll();
 //            for (int i = 0; i < userAccountData.length; i++){
 //                UserAccountData userAccountData1 = userAccountData[i];
 //                System.out.println(userAccountData1.toString());

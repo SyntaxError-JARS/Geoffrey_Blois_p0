@@ -6,6 +6,7 @@ import com.revature.bank_application.util.ConnectionFactory;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 
 
 // The word implements below allow me to implement method from the BankAccountCrudable Interface class. This make so I don't have to recreate so many methods.
@@ -50,13 +51,13 @@ public class UserAccountDao implements BankAccountCrudable<UserAccountData> {
 
 
     @Override
-    public UserAccountData[] findAll() throws IOException {
+    public ArrayList<UserAccountData> findAll() throws IOException {
         // This allows me to read files
 
 
         // I am initializing an array of 10 userAccountData
-        UserAccountData[] users = new UserAccountData[10];
-        int index = 0;
+        ArrayList<UserAccountData>  users = new ArrayList<>();
+
 
         // In this try with resources once called it establishes a connection to my database so that the methods inside it can interact with my database.
         try (Connection conn = ConnectionFactory.getInstance().getConnection();){ // try with resource, because connection extends the interface Auto-closes
@@ -82,9 +83,7 @@ public class UserAccountDao implements BankAccountCrudable<UserAccountData> {
                 userAccountData.setEmail(rs.getString("email"));
                 userAccountData.setPassword(rs.getString("password"));
 
-                users[index] = userAccountData;
-
-                index++;
+                users.add(userAccountData);
 
 
 

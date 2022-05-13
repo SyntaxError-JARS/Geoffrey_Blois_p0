@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class UserServlet extends HttpServlet {
 
@@ -51,7 +52,7 @@ public class UserServlet extends HttpServlet {
 
         }
 
-        UserAccountData[] userAccountData = userAccountServices.readUsers();
+        ArrayList<UserAccountData> userAccountData = userAccountServices.readUsers();
 
         String payload = mapper.writeValueAsString(userAccountData);
 
