@@ -1,6 +1,7 @@
 package com.revature.bank_application.daos;
 
 import com.revature.bank_application.execeptions.BankAccountInsertDataException;
+import com.revature.bank_application.execeptions.ResourcePersistanceException;
 import com.revature.bank_application.models.BankAccountData;
 import com.revature.bank_application.models.UserAccountData;
 import com.revature.bank_application.util.ConnectionFactory;
@@ -59,6 +60,10 @@ public class BankAccountDoa implements BankAccountCrudable<BankAccountData>{
             ps.setInt(1, Integer.parseInt(bId));
 
             ResultSet rs = ps.executeQuery();
+
+            if(!rs.next()){
+                throw new ResourcePersistanceException("Bank account was not found in the database, please check  Bank_ID entered was correct.");
+            }
 
             BankAccountData bankAccountData =new BankAccountData();
 

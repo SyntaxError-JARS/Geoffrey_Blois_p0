@@ -29,8 +29,11 @@ public class BankAccountServices {
         return true;
     }
 
-    public void findbyId(String bId){
+    public BankAccountData findbyId(String bId){
+
         BankAccountData findbyId = bankAccountDoa.findById(bId);
+
+        return findbyId;
     }
 
 }

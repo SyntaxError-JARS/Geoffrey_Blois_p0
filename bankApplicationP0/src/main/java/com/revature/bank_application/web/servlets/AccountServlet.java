@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class AccountServlet extends HttpServlet {
@@ -26,6 +27,30 @@ public class AccountServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(!checkAuth(req, resp)) return;
+
+        if(req.getParameter("id") != null){
+            BankAccountData bankAccountData;
+            try {
+                resp.getWriter().write("Grabbing User! \n");
+                bankAccountData = bankAccountServices.findbyId(req.getParameter("id"));
+            }catch (ResourcePersistanceException e){
+                //logger.warn(e.getMessage());
+                resp.setStatus(404);
+                resp.getWriter().write(e.getMessage());
+                return;
+            }
+            String payload = mapper.writeValueAsString(bankAccountData);
+            resp.getWriter().write("You have successfully looked up a bank account!\n");
+            resp.getWriter().write(payload);
+            return;
+
+        }
+
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             //BankAccountCreds bankAccountCreds = mapper.readValue(req.getInputStream(), BankAccountCreds.class);
@@ -38,13 +63,24 @@ public class AccountServlet extends HttpServlet {
             resp.getWriter().write("You have successfully created a new user account!");
             resp.getWriter().write(payload);
             resp.setStatus(200);
-        }catch (InvalidRequestException | ResourcePersistanceException e) {
+        } catch (InvalidRequestException | ResourcePersistanceException e) {
             resp.setStatus(404);
             resp.getWriter().write(e.getMessage());
-        }catch (Exception e){
+        } catch (Exception e) {
             resp.setStatus(409);
             resp.getWriter().write(e.getMessage());
+        }
+
     }
 
+
+    protected boolean checkAuth(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        HttpSession httpSession = req.getSession();
+        if(httpSession.getAttribute("authUser") == null){
+            resp.getWriter().write("Unauthorized request - not logged in as register user ");
+            resp.setStatus(401);
+            return false;
+        }
+        return true;
     }
 }

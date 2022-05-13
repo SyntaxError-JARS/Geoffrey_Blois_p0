@@ -32,9 +32,6 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, NumberFormatException {
 
         if(!checkAuth(req, resp)) return;
-//        String pathInfo = req.getPathInfo();
-//        String[] pathParts = pathInfo.split("/");
-//        System.out.println(pathParts[0] + pathParts[1]);
 
         if(req.getParameter("id") != null){
             UserAccountData userAccountData;
