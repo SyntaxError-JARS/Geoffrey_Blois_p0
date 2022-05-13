@@ -30,11 +30,11 @@ public class AccountServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(!checkAuth(req, resp)) return;
 
-        if(req.getParameter("id") != null){
+        if(req.getParameter("bank_id") != null){
             BankAccountData bankAccountData;
             try {
                 resp.getWriter().write("Grabbing User! \n");
-                bankAccountData = bankAccountServices.findbyId(req.getParameter("id"));
+                bankAccountData = bankAccountServices.findbyId(req.getParameter("bank_id"));
             }catch (ResourcePersistanceException e){
                 //logger.warn(e.getMessage());
                 resp.setStatus(404);
