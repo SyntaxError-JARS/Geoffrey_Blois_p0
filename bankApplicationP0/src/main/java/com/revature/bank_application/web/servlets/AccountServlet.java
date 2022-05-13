@@ -5,6 +5,7 @@ import com.revature.bank_application.execeptions.InvalidRequestException;
 import com.revature.bank_application.execeptions.ResourcePersistanceException;
 import com.revature.bank_application.models.BankAccountData;
 import com.revature.bank_application.services.BankAccountServices;
+import com.revature.bank_application.web.dto.BankDeleteCreds;
 import com.revature.bank_application.web.dto.UpdateBankAccountCreds;
 
 import javax.servlet.ServletException;
@@ -90,6 +91,26 @@ public class AccountServlet extends HttpServlet {
             String payload = mapper.writeValueAsString(newBankAccountName);
 
             resp.getWriter().write("You have successfully updated your Bank Account Name");
+            resp.getWriter().write(payload);
+            resp.setStatus(200);
+        }catch (InvalidRequestException | ResourcePersistanceException e) {
+            resp.setStatus(404);
+            resp.getWriter().write(e.getMessage());
+        } catch (Exception e) {
+            resp.setStatus(409);
+            resp.getWriter().write(e.getMessage());
+        }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            BankDeleteCreds deleteBankAccount = mapper.readValue(req.getInputStream(), BankDeleteCreds.class);
+            boolean deletedBank = bankAccountServices.deleteBankAccount(deleteBankAccount.getId());
+
+            String payload = mapper.writeValueAsString(deletedBank);
+
+            resp.getWriter().write("You have successfully deleted your account");
             resp.getWriter().write(payload);
             resp.setStatus(200);
         }catch (InvalidRequestException | ResourcePersistanceException e) {

@@ -53,4 +53,10 @@ public class BankAccountServices {
 
     }
 
+    public boolean deleteBankAccount(String id){
+        boolean deletedBankAccount = bankAccountDoa.delete(id);
+
+        return deletedBankAccount;
+    }
+
 }

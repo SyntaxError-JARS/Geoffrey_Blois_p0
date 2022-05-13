@@ -130,7 +130,23 @@ public class BankAccountDoa implements BankAccountCrudable<BankAccountData>{
 
     @Override
     public boolean delete(String id) {
-        return false;
+
+        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+            String sql = "delete from bankaccount where bank_id=?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, id);
+
+
+            ps.executeUpdate();
+
+            return true;
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 
