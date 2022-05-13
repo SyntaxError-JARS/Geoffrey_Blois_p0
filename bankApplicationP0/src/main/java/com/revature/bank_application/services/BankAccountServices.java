@@ -66,4 +66,11 @@ public class BankAccountServices {
 
     }
 
+    public BankAccountData withDraw(String deposit, String id){
+        BankAccountData withdrawInAccount = bankAccountDoa.withdraw(deposit, id);
+
+        return withdrawInAccount;
+
+    }
+
 }

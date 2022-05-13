@@ -170,17 +170,24 @@ public class BankAccountDoa implements BankAccountCrudable<BankAccountData>{
         return null;
     }
 
-    public double withdraw(){
+    public BankAccountData withdraw(String deposit, String id){
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
+            String sql = "update bankaccount set bank_account_amount = bank_account_amount - ? where bank_id = ?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1 , Integer.parseInt(deposit));
+            ps.setInt(2, Integer.parseInt(id));
+
+            ps.executeUpdate();
 
 
-
-            return 0;
+            return null;
         }catch (SQLException e) {
             e.printStackTrace();
-            return 0;
+            return null;
         }
     }
 

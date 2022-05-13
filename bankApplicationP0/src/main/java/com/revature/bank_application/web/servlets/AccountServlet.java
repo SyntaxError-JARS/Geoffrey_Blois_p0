@@ -5,7 +5,7 @@ import com.revature.bank_application.execeptions.InvalidRequestException;
 import com.revature.bank_application.execeptions.ResourcePersistanceException;
 import com.revature.bank_application.models.BankAccountData;
 import com.revature.bank_application.services.BankAccountServices;
-import com.revature.bank_application.web.dto.BankDeleteCreds;
+import com.revature.bank_application.web.dto.BankDepositCreds;
 import com.revature.bank_application.web.dto.UpdateBankAccountCreds;
 
 import javax.servlet.ServletException;
@@ -106,7 +106,7 @@ public class AccountServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            BankDeleteCreds deleteBankAccount = mapper.readValue(req.getInputStream(), BankDeleteCreds.class);
+            BankDepositCreds deleteBankAccount = mapper.readValue(req.getInputStream(), BankDepositCreds.class);
             boolean deletedBank = bankAccountServices.deleteBankAccount(deleteBankAccount.getId());
 
             String payload = mapper.writeValueAsString(deletedBank);

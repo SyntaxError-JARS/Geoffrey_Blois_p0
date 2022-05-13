@@ -1,6 +1,6 @@
 package com.revature.bank_application.web.dto;
 
-public class BankDeleteCreds {
+public class BankDepositCreds {
 
    private String id;
 

@@ -7,7 +7,7 @@ import com.revature.bank_application.services.BankAccountServices;
 import com.revature.bank_application.services.UserAccountServices;
 import com.revature.bank_application.web.servlets.AccountServlet;
 import com.revature.bank_application.web.servlets.AuthServlet;
-import com.revature.bank_application.web.servlets.DepositeAndWithDraw;
+import com.revature.bank_application.web.servlets.DepositeAndWithDrawServlets;
 import com.revature.bank_application.web.servlets.UserServlet;
 
 import javax.servlet.ServletContext;
@@ -30,7 +30,7 @@ public class ContextLoaderListener implements ServletContextListener {
         AuthServlet authServlet = new AuthServlet(userAccountServices, mapper);
         UserServlet userServlet = new UserServlet(userAccountServices, mapper);
         AccountServlet accountServlet = new AccountServlet(bankAccountServices, mapper);
-        DepositeAndWithDraw depositeAndWithDraw = new DepositeAndWithDraw(bankAccountServices, mapper);
+        DepositeAndWithDrawServlets depositeAndWithDraw = new DepositeAndWithDrawServlets(bankAccountServices, mapper);
 
         // TODO: add a user servlet
 
