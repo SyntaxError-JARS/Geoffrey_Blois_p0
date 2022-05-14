@@ -7,6 +7,8 @@ public class BankDepositCreds {
    private String deposit;
 
 
+
+
     public String getDeposit() {
         return deposit;
     }
@@ -14,6 +16,8 @@ public class BankDepositCreds {
     public String getId() {
         return id;
     }
+
+
 
     public void setId(String id) {
         this.id = id;

@@ -19,7 +19,7 @@ create table bankaccount(
 	bank_id serial not null unique,
 	bank_account_number int primary key,
 	bank_account_name varchar(25) not null,	
-	bank_account_amount int not null,
+	bank_account_amount double precision not null,
 	has_bank_account bool default false
 );
 

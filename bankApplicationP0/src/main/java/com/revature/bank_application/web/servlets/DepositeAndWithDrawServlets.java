@@ -49,21 +49,23 @@ public class DepositeAndWithDrawServlets extends HttpServlet {
             }
         }
 
-        try {
-            BankWithdrawCreds bankWithdrawCreds = mapper.readValue(req.getInputStream(), BankWithdrawCreds.class);
-            BankAccountData lossingMoney = bankAccountServices.withDraw(bankWithdrawCreds.getWithdraw(), bankWithdrawCreds.getId());
+        if (req.getParameter("withdraw") != null) {
+            try {
+                BankWithdrawCreds bankWithdrawCreds = mapper.readValue(req.getInputStream(), BankWithdrawCreds.class);
+                BankAccountData lossingMoney = bankAccountServices.withDraw(bankWithdrawCreds.getWithdraw(), bankWithdrawCreds.getId());
 
-            String payload = mapper.writeValueAsString(lossingMoney);
+                String payload = mapper.writeValueAsString(lossingMoney);
 
-            resp.getWriter().write("You have Successfully withdrew money from your account");
-            resp.getWriter().write(payload);
-            resp.setStatus(200);
-        }catch (InvalidRequestException | ResourcePersistanceException e) {
-            resp.setStatus(404);
-            resp.getWriter().write(e.getMessage());
-        } catch (Exception e) {
-            resp.setStatus(409);
-            resp.getWriter().write(e.getMessage());
+                resp.getWriter().write("You have Successfully withdrew money from your account");
+                resp.getWriter().write(payload);
+                resp.setStatus(200);
+            } catch (InvalidRequestException | ResourcePersistanceException e) {
+                resp.setStatus(404);
+                resp.getWriter().write(e.getMessage());
+            } catch (Exception e) {
+                resp.setStatus(409);
+                resp.getWriter().write(e.getMessage());
+            }
         }
     }
 
