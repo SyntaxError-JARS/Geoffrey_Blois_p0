@@ -88,6 +88,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        if(!checkAuth(req, resp)) return;
         try {
             UserDeleteCreds userDeleteCreds = mapper.readValue(req.getInputStream(), UserDeleteCreds.class);
             UserAccountData deleteUser = userAccountServices.deleteAccount(userDeleteCreds.getId());
@@ -109,6 +110,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(!checkAuth(req, resp)) return;
         try {
             UserUpdateCreds userUpdateCreds = mapper.readValue(req.getInputStream(), UserUpdateCreds.class);
             boolean updateUser = userAccountServices.updateAccount(userUpdateCreds.getId2(), userUpdateCreds.getUserName());

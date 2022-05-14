@@ -1,6 +1,7 @@
 package com.revature.bank_application.services;
 
 import com.revature.bank_application.daos.BankAccountDoa;
+import com.revature.bank_application.execeptions.InvalidRequestException;
 import com.revature.bank_application.models.BankAccountData;
 
 import java.io.IOException;
@@ -60,6 +61,11 @@ public class BankAccountServices {
     }
 
     public BankAccountData deposit(String deposit, String id){
+
+        if(depositCheck(deposit) == false){
+            throw new InvalidRequestException("User inputted a negative number or not a int. Please check to see if the information enter was correct.");
+        }
+
         BankAccountData depositInAccount = bankAccountDoa.deposit(deposit, id);
 
         return depositInAccount;
@@ -67,10 +73,29 @@ public class BankAccountServices {
     }
 
     public BankAccountData withDraw(String deposit, String id){
+
+        if(withdrawCheck(deposit) == false){
+            throw new InvalidRequestException("User inputted a negative number or not a int. Please check to see if the information enter was correct.");
+        }
         BankAccountData withdrawInAccount = bankAccountDoa.withdraw(deposit, id);
 
         return withdrawInAccount;
 
+    }
+
+     //if(bankAccountData.getBankAccountName() == null || bankAccountData.getBankAccountName().trim().equals("")) return false;
+    public boolean depositCheck(String deposit){
+
+        if(Integer.parseInt(deposit) < 0 || deposit.equals("")) return false;
+
+        return true;
+    }
+
+    public boolean withdrawCheck(String deposit){
+
+        if(Integer.parseInt(deposit) < 0 || deposit.equals("")) return false;
+
+        return true;
     }
 
 }

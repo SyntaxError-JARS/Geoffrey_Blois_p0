@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class DepositeAndWithDrawServlets extends HttpServlet {
@@ -29,6 +30,7 @@ public class DepositeAndWithDrawServlets extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        if(!checkAuth(req, resp)) return;
 
         if (req.getParameter("deposit") != null) {
             try {
@@ -67,6 +69,17 @@ public class DepositeAndWithDrawServlets extends HttpServlet {
                 resp.getWriter().write(e.getMessage());
             }
         }
+
+
+    }
+    protected boolean checkAuth(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        HttpSession httpSession = req.getSession();
+        if(httpSession.getAttribute("authUser") == null){
+            resp.getWriter().write("Unauthorized request - not logged in as register user ");
+            resp.setStatus(401);
+            return false;
+        }
+        return true;
     }
 
 

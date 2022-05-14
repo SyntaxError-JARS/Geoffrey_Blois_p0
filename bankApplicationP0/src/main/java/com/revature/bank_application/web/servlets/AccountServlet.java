@@ -60,6 +60,7 @@ public class AccountServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(!checkAuth(req, resp)) return;
         try {
             //BankAccountCreds bankAccountCreds = mapper.readValue(req.getInputStream(), BankAccountCreds.class);
             BankAccountData bankAccountData = mapper.readValue(req.getInputStream(), BankAccountData.class);
@@ -83,6 +84,7 @@ public class AccountServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(!checkAuth(req, resp)) return;
             try {
                 UpdateBankAccountCreds newBankName = mapper.readValue(req.getInputStream(), UpdateBankAccountCreds.class);
                 boolean newBankAccountName = bankAccountServices.updateBankAccountName(newBankName.getId2(), newBankName.getNewBankAccountName());
@@ -105,6 +107,7 @@ public class AccountServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(!checkAuth(req, resp)) return;
         try {
             BankDepositCreds deleteBankAccount = mapper.readValue(req.getInputStream(), BankDepositCreds.class);
             boolean deletedBank = bankAccountServices.deleteBankAccount(deleteBankAccount.getId());
