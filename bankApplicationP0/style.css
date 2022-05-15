@@ -1,0 +1,61 @@
+body{
+    background-image: url(discobackground.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* vh stands for viewpoint hight which is the viewable screen's height */
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: block;
+    max-width: 100%;
+}
+
+
+h1{
+    text-align: center;
+    font-size: 70px;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+    /* This below is putting a small boarder around the text */
+    text-shadow: 
+    -1px -1px 0 #000000,
+    1px 1px 0 #000000,
+    -1px -1px 0 #000000,
+    1px 1px 0 #000000,
+    -2px 0 0 #000000,
+    2px 0 0 #000000,
+    0 2px 0 #000000,
+    0 -2px 0 #000000;
+}
+
+h2{
+    text-align: center;
+    font-size: 45px;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+    text-shadow: 
+    -1px -1px 0 #000000,
+    1px 1px 0 #000000,
+    -1px -1px 0 #000000,
+    1px 1px 0 #000000,
+    -2px 0 0 #000000,
+    2px 0 0 #000000,
+    0 2px 0 #000000,
+    0 -2px 0 #000000;
+}
+
+p{
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(255, 255, 255);
+    text-shadow: 
+    -1px -1px 0 #000000,
+    1px 1px 0 #000000,
+    -1px -1px 0 #000000,
+    1px 1px 0 #000000,
+    -2px 0 0 #000000,
+    2px 0 0 #000000,
+    0 2px 0 #000000,
+    0 -2px 0 #000000;
+}

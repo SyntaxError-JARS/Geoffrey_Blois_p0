@@ -56,7 +56,7 @@ public class UserAccountServices {
         if(persistedAccount == null){
             throw new ResourcePersistanceException("Account was not persisted to the database upon registration");
         }
-        
+
         return true;
     }
 
