@@ -53,8 +53,10 @@ public class DepositeAndWithDrawServlets extends HttpServlet {
 
         if (req.getParameter("withdraw") != null) {
             try {
+
                 BankWithdrawCreds bankWithdrawCreds = mapper.readValue(req.getInputStream(), BankWithdrawCreds.class);
                 BankAccountData lossingMoney = bankAccountServices.withDraw(bankWithdrawCreds.getWithdraw(), bankWithdrawCreds.getId());
+
 
                 String payload = mapper.writeValueAsString(lossingMoney);
 

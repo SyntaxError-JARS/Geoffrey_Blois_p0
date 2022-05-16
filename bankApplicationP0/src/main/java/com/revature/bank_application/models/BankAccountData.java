@@ -3,13 +3,15 @@ package com.revature.bank_application.models;
 import java.util.Random;
 
 public class BankAccountData {
+    private static int currentAccountAmount;
 
-     //File signInFile = new File("data/User_Data");
+
+    //File signInFile = new File("data/User_Data");
     // TODO: Update this class to bank account class instead so the models package follows the amount of tables I have.
 
-    private int bankAccountNumber;
+    private static int bankAccountNumber;
     private String bankAccountName;
-    private int bankAccountAmount;
+    private static int bankAccountAmount;
     private boolean hasBankAccount;
 
     private int randBankNumber;
@@ -18,13 +20,14 @@ public class BankAccountData {
 
 
 
-    public BankAccountData(String bankAccountName, int bankAccountAmount){
+    public BankAccountData(String bankAccountName, int bankAccountAmount, String cuurentBankAccount){
         super();
         this.bankAccountNumber = bankAccountNumber;
         this.bankAccountName = bankAccountName;
         this.bankAccountAmount = bankAccountAmount;
         this.hasBankAccount = hasBankAccount;
         this.randBankNumber = randBankNumber;
+        currentAccountAmount = currentAccountAmount;
     }
 
     public BankAccountData( ){
@@ -33,6 +36,10 @@ public class BankAccountData {
 
     public int getBankAccountNumber() {
         return bankAccountNumber;
+    }
+
+    public static int getCurrentAccountAmount() {
+        return currentAccountAmount = bankAccountAmount;
     }
 
     public void setBankAccountNumber(int bankAccountNumber) {
@@ -84,6 +91,7 @@ public class BankAccountData {
 
         return number;
     }
+
     @Override
     public String toString() {
         return "BankAccountData{" +

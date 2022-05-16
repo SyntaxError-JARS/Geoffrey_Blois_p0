@@ -111,12 +111,14 @@ public class BankAccountDoa implements BankAccountCrudable<BankAccountData>{
     public boolean update(String id2, String newBankAccountName) {
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
             String sql = "update bankaccount set bank_account_name=? where bank_id=?";
 
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setString(1, newBankAccountName);
             ps.setInt(2, Integer.parseInt(id2));
+
 
             ps.executeUpdate();
 

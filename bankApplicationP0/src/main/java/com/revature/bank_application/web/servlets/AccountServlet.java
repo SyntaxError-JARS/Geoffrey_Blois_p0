@@ -62,7 +62,7 @@ public class AccountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(!checkAuth(req, resp)) return;
         try {
-            //BankAccountCreds bankAccountCreds = mapper.readValue(req.getInputStream(), BankAccountCreds.class);
+
             BankAccountData bankAccountData = mapper.readValue(req.getInputStream(), BankAccountData.class);
             boolean newBankAccount = bankAccountServices.CreateBankAccount(bankAccountData);
 

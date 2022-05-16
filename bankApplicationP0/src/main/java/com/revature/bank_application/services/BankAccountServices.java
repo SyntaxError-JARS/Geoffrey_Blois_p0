@@ -16,7 +16,7 @@ public class BankAccountServices {
     }
 
 
-    public  boolean CreateBankAccount(BankAccountData bankAccountData){
+    public boolean CreateBankAccount(BankAccountData bankAccountData) {
 
         BankAccountData persistedAccount = bankAccountDoa.create(bankAccountData);
 
@@ -27,13 +27,13 @@ public class BankAccountServices {
         return true;
     }
 
-    public boolean validateBankAccount(BankAccountData bankAccountData){
-        if(bankAccountData == null) return false;
-        if(bankAccountData.getBankAccountNumber() == 0) return false;
+    public boolean validateBankAccount(BankAccountData bankAccountData) {
+        if (bankAccountData == null) return false;
+        if (bankAccountData.getBankAccountNumber() == 0) return false;
         return true;
     }
 
-    public BankAccountData findbyId(String bId){
+    public BankAccountData findbyId(String bId) {
 
         BankAccountData findbyId = bankAccountDoa.findById(bId);
 
@@ -47,55 +47,65 @@ public class BankAccountServices {
         return findAll;
     }
 
-    public boolean updateBankAccountName(String id2, String newBankAccountName){
+    public boolean updateBankAccountName(String id2, String newBankAccountName) {
         boolean updatedBankAccount = bankAccountDoa.update(id2, newBankAccountName);
 
         return updatedBankAccount;
 
     }
 
-    public boolean deleteBankAccount(String id){
+    public boolean deleteBankAccount(String id) {
         boolean deletedBankAccount = bankAccountDoa.delete(id);
 
         return deletedBankAccount;
     }
 
-    public BankAccountData deposit(String deposit, String id){
+    public BankAccountData deposit(String deposit, String id) {
 
-        if(depositCheck(deposit) == false){
+        if (depositCheck(deposit) == false) {
             throw new InvalidRequestException("User inputted a negative number or not a int. Please check to see if the information enter was correct.");
         }
-
         BankAccountData depositInAccount = bankAccountDoa.deposit(deposit, id);
+
 
         return depositInAccount;
 
     }
 
-    public BankAccountData withDraw(String deposit, String id){
+    public BankAccountData withDraw(String deposit, String id) {
 
-        if(withdrawCheck(deposit) == false){
-            throw new InvalidRequestException("User inputted a negative number or not a int. Please check to see if the information enter was correct.");
+
+        //BankAccountData.currentAccountAmount();
+        if (withdrawCheck(deposit) == false) {
+            throw new InvalidRequestException("User inputted a negative number or not a int. Also you could have entered more money than you have. Please check to see if the information enter was correct or that you have enough money.");
         }
+
         BankAccountData withdrawInAccount = bankAccountDoa.withdraw(deposit, id);
+
+        //
 
         return withdrawInAccount;
 
     }
 
-     //if(bankAccountData.getBankAccountName() == null || bankAccountData.getBankAccountName().trim().equals("")) return false;
-    public boolean depositCheck(String deposit){
+    //if(bankAccountData.getBankAccountName() == null || bankAccountData.getBankAccountName().trim().equals("")) return false;
+    public boolean depositCheck(String deposit) {
 
-        if(Integer.parseInt(deposit) < 0 || deposit.equals("")) return false;
+        if (Integer.parseInt(deposit) < 0 || deposit.equals("")) return false;
+
+
+
+        return true;
+    }
+
+    public boolean withdrawCheck(String deposit) {
+
+        //BankAccountData bankAccountData;
+        if (Integer.parseInt(deposit) < 0 || deposit.equals("")) return false;
+        if (BankAccountData.getCurrentAccountAmount()- Integer.parseInt(deposit) < 0) return false;
 
         return true;
     }
 
-    public boolean withdrawCheck(String deposit){
-
-        if(Integer.parseInt(deposit) < 0 || deposit.equals("")) return false;
-
-        return true;
-    }
 
 }
