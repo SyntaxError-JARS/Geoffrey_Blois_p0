@@ -27,11 +27,16 @@ public class DepositeAndWithDrawServlets extends HttpServlet {
         this.mapper = mapper;
     }
 
+    // So do a withdrawal or deposit in postman you need to use a doPut. Also, in the url you need to use a ?deposit or withdraw
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         if(!checkAuth(req, resp)) return;
 
+        // This if statement is checking if the ?=deposit in the url is there, or it will check if the parameter in withdraw in the other if statement.
+        // Based on what parameter is set it will add funds or subtract funds.
+        // The reason this is there is so that I can do multiple doPut calls in one method instead of many a class for each doPut call
+        // The only reason I put this is a separate servlet is that the account servlet was getting to long.
         if (req.getParameter("deposit") != null) {
             try {
                 BankDepositCreds deposit = mapper.readValue(req.getInputStream(), BankDepositCreds.class);

@@ -191,6 +191,7 @@ public class UserAccountDao implements BankAccountCrudable<UserAccountData> {
         }
     }
 
+    // This method in the doa is used to authenticate the user on log in.
     public UserAccountData authenticateUser(String email, String password){
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
@@ -203,15 +204,17 @@ public class UserAccountDao implements BankAccountCrudable<UserAccountData> {
 
             UserAccountData userAccountData = new UserAccountData();
 
+            // This is just checking the individual rows on iteration and if the next row seen if nothing/null it will return null.
             if(!rs.next()){
                 return null;
             }
 
-            userAccountData.setUserName(userAccountData.getUserName());
-            userAccountData.setPassword(userAccountData.getPassword());
-            userAccountData.setEmail(userAccountData.getEmail());
-            userAccountData.setFirstName(userAccountData.getFirstName());
-            userAccountData.setLastName(userAccountData.getLastName());
+
+            userAccountData.setUserName(rs.getString("user_name"));
+            userAccountData.setPassword(rs.getString("password"));
+            userAccountData.setEmail(rs.getString("email"));
+            userAccountData.setFirstName(rs.getString("first_name"));
+            userAccountData.setLastName(rs.getString("last_name"));
 
             return userAccountData;
 

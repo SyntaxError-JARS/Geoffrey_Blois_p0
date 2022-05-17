@@ -29,11 +29,15 @@ public class UserServlet extends HttpServlet {
     }
 
 
+    // The doGet allows a user to get information from the database which can be done a million times and not affect the database.
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, NumberFormatException {
 
+        //Here I'm checking if the user is logged in before they can use this doGet.
         if(!checkAuth(req, resp)) return;
 
+        // Here is where I check to see If I am trying to find by id and if I am it will go into this if statement and execute the sql statement in the doa after passing
+        // through the checks I set up in place in the userAccountServices.
         if(req.getParameter("id") != null){
             UserAccountData userAccountData;
             try {
@@ -52,6 +56,7 @@ public class UserServlet extends HttpServlet {
 
         }
 
+        // If the user is not looking for a user by id they can use findByAll which happens here.
         ArrayList<UserAccountData> userAccountData = userAccountServices.readUsers();
 
         String payload = mapper.writeValueAsString(userAccountData);
@@ -59,6 +64,7 @@ public class UserServlet extends HttpServlet {
         resp.getWriter().write(payload);
     }
 
+    // doPost allows for a user input information to be uploaded to the database.
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -68,11 +74,6 @@ public class UserServlet extends HttpServlet {
 
             String payload = mapper.writeValueAsString(newUser);
 
-            //HttpSession httpSession = req.getSession(true);
-            //httpSession.setAttribute("newUser", newUser);
-
-
-            // TODO: Replace the HttpSession with this for the rest of the methods.
             resp.getWriter().write("You have successfully created a new user account!");
             resp.getWriter().write(payload);
             resp.setStatus(200);
@@ -86,6 +87,7 @@ public class UserServlet extends HttpServlet {
         }
     }
 
+    // doDelete called for information on the database to be deleted when a user calls for it.
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -109,6 +111,7 @@ public class UserServlet extends HttpServlet {
         }
     }
 
+    // doPut is used for updating  data on the database. You can use patch but put is better.
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(!checkAuth(req, resp)) return;
@@ -131,6 +134,8 @@ public class UserServlet extends HttpServlet {
         }
     }
 
+
+    // this protected checkAuth method is checking if the user is logged in before executing some of the user calls like doGet, doDelete, doPut
     protected boolean checkAuth(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession httpSession = req.getSession();
         if(httpSession.getAttribute("authUser") == null){

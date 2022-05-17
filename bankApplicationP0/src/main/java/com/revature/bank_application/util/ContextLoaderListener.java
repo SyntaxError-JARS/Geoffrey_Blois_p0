@@ -20,6 +20,9 @@ public class ContextLoaderListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+
+        //Here I am creating a new ObjectMapper and new useraccountDoa + a bankaccountDoa. The reason for this is so I don't have to create all of these in each
+        //servlet. This is the same reasoning for the services as well.
         ObjectMapper mapper = new ObjectMapper();
         UserAccountDao userAccountDao = new UserAccountDao();
         BankAccountDoa bankAccountDoa = new BankAccountDoa();
@@ -27,13 +30,14 @@ public class ContextLoaderListener implements ServletContextListener {
         UserAccountServices userAccountServices = new UserAccountServices(userAccountDao);
         BankAccountServices bankAccountServices = new BankAccountServices(bankAccountDoa);
 
+        //Here I am creating a new instance of each of my servlets.
         AuthServlet authServlet = new AuthServlet(userAccountServices, mapper);
         UserServlet userServlet = new UserServlet(userAccountServices, mapper);
         AccountServlet accountServlet = new AccountServlet(bankAccountServices, mapper);
         DepositeAndWithDrawServlets depositeAndWithDraw = new DepositeAndWithDrawServlets(bankAccountServices, mapper);
 
-        // TODO: add a user servlet
 
+        //These are the /commands that I would have in a url or in postman after .com/test-app/
         ServletContext context = sce.getServletContext();
         context.addServlet("AuthServlet", authServlet).addMapping("/auth");
         context.addServlet("UserServlet", userServlet).addMapping("/user/*");

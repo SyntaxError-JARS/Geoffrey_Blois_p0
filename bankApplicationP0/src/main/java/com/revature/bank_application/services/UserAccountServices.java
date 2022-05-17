@@ -72,6 +72,7 @@ public class UserAccountServices {
         return true;
     }
 
+    // This method calls my delete(using the id in the parameter) to my dao class which then executes it on the database.
     public UserAccountData deleteAccount(String id){
 
         boolean deleteAccount = userAccountDao.delete(id);
@@ -79,11 +80,13 @@ public class UserAccountServices {
         return null;
     }
 
+    // This method calls my update(using the id2 and userName in the parameter) to my dao class which then executes it on the database.
     public boolean updateAccount(String id2, String userName){
         boolean updateAccount = userAccountDao.update(id2, userName);
         return updateAccount;
     }
 
+    // This method calls my findById(using the id in the parameter) to my dao class which then executes it on the database.
     public UserAccountData findByID(String id){
 
         UserAccountData findUserById = userAccountDao.findById(id);
@@ -91,6 +94,9 @@ public class UserAccountServices {
 
         return findUserById;
     }
+
+    // In this method I am check to see if the user log in information was correct with my database before it logs them in. If their information is not on my database
+    // it will throw AuthenticationException.
     public UserAccountData authenticateUser(String email, String password){
         if(password == null || password.trim().equals("") || email == null || email.trim().equals("")){
             throw new InvalidRequestException("Either username or email is an invalid entry. Please try logging in again");

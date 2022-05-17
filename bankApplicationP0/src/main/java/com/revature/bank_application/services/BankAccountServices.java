@@ -40,6 +40,8 @@ public class BankAccountServices {
         return findbyId;
     }
 
+    // For everytime I am calling for an id or findall I am using the built Arraylist for collection as jackson does not like custom based solutions
+    // This allows me to have an array that is not limited by being set manually.
     public ArrayList<BankAccountData> findAll() throws IOException {
 
         ArrayList<BankAccountData> findAll = bankAccountDoa.findAll();
@@ -100,8 +102,10 @@ public class BankAccountServices {
 
     public boolean withdrawCheck(String deposit) {
 
-        //BankAccountData bankAccountData;
+        // Here I am checking if there is a negative number inputted because I only want a positive number inputted so, it will return false.
         if (Integer.parseInt(deposit) < 0 || deposit.equals("")) return false;
+
+        // Here I am check if the account balance - the withdrawal amount and then if it is return false.
         if (BankAccountData.getCurrentAccountAmount()- Integer.parseInt(deposit) < 0) return false;
 
         return true;

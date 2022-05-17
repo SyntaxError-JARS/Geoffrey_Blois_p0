@@ -157,6 +157,7 @@ public class BankAccountDoa implements BankAccountCrudable<BankAccountData>{
 
         try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 
+            // for deposit and withdraw you need to do an update statement and set the bank_account_amount row in this case + the amount to deposit or withdraw
             String sql = "update bankaccount set bank_account_amount = bank_account_amount + ? where bank_id = ?";
 
             PreparedStatement ps = conn.prepareStatement(sql);
