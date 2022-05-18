@@ -24,7 +24,7 @@
                     <configuration>
                         <url>http://localhost:8080/manager/text</url>
                         <server>LocalTomcat</server>
-                        <path>/test-app</path>
+                        <path>/Bank-of-Martinaise</path>
                         <update>true</update>
                     </configuration>
                 </plugin>
