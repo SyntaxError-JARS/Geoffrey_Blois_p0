@@ -3,6 +3,7 @@ package com.revature.bank_application.services;
 import com.revature.bank_application.daos.BankAccountDoa;
 import com.revature.bank_application.execeptions.InvalidRequestException;
 import com.revature.bank_application.models.BankAccountData;
+import com.revature.bank_application.util.logging.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ public class BankAccountServices {
 
     private BankAccountDoa bankAccountDoa;
 
+    private Logger logger = Logger.getLogger(false);
     public BankAccountServices(BankAccountDoa bankAccountDoa) {
         this.bankAccountDoa = bankAccountDoa;
     }
@@ -20,9 +22,7 @@ public class BankAccountServices {
 
         BankAccountData persistedAccount = bankAccountDoa.create(bankAccountData);
 
-//        if(persistedAccount == null){
-//            throw new ResourcePersistanceException("Account was not persisted on account creation");
-//        }
+        logger.info("A new bank account was created \n");
 
         return true;
     }
@@ -37,6 +37,7 @@ public class BankAccountServices {
 
         BankAccountData findbyId = bankAccountDoa.findById(bId);
 
+        logger.info("A single bank account was found \n");
         return findbyId;
     }
 
@@ -46,12 +47,15 @@ public class BankAccountServices {
 
         ArrayList<BankAccountData> findAll = bankAccountDoa.findAll();
 
+        logger.info("All bank accounts found \n");
+
         return findAll;
     }
 
     public boolean updateBankAccountName(String id2, String newBankAccountName) {
         boolean updatedBankAccount = bankAccountDoa.update(id2, newBankAccountName);
 
+        logger.info("A user updated there bank account name \n");
         return updatedBankAccount;
 
     }
@@ -59,17 +63,19 @@ public class BankAccountServices {
     public boolean deleteBankAccount(String id) {
         boolean deletedBankAccount = bankAccountDoa.delete(id);
 
+        logger.info("A user deleted there bank account");
         return deletedBankAccount;
     }
 
     public BankAccountData deposit(String deposit, String id) {
 
         if (depositCheck(deposit) == false) {
+            logger.info("User inputted a negative number or not a int. Please check to see if the information enter was correct.");
             throw new InvalidRequestException("User inputted a negative number or not a int. Please check to see if the information enter was correct.");
         }
         BankAccountData depositInAccount = bankAccountDoa.deposit(deposit, id);
 
-
+        logger.info("A user deposited money into there account");
         return depositInAccount;
 
     }
@@ -79,10 +85,12 @@ public class BankAccountServices {
 
         //BankAccountData.currentAccountAmount();
         if (withdrawCheck(deposit) == false) {
+            logger.info("User inputted a negative number or not a int. Also you could have entered more money than you have. Please check to see if the information enter was correct or that you have enough money.");
             throw new InvalidRequestException("User inputted a negative number or not a int. Also you could have entered more money than you have. Please check to see if the information enter was correct or that you have enough money.");
         }
 
         BankAccountData withdrawInAccount = bankAccountDoa.withdraw(deposit, id);
+        logger.info("A user has withdrawn money from there account");
 
         //
 
@@ -94,8 +102,6 @@ public class BankAccountServices {
     public boolean depositCheck(String deposit) {
 
         if (Integer.parseInt(deposit) < 0 || deposit.equals("")) return false;
-
-
 
         return true;
     }
